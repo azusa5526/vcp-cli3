@@ -8,7 +8,7 @@
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img class="zoomImg" :src="product.imageUrl" alt />
+              <img class="img" :src="product.imageUrl" @click="imgZoom" alt />
             </div>
           </div>
         </div>
@@ -115,6 +115,8 @@
 </template>
 
 <script>
+import $ from 'jquery';
+
 export default {
   data () {
     return {
@@ -289,6 +291,15 @@ export default {
       }
 
       this.recommandProducts = newArr;
+    },
+
+    imgZoom () {
+      /* eslint-disable */
+      $('.img').elevateZoom({
+        tint: true,
+        tintColour: '#F90',
+        tintOpacity: 0.5
+      });
     }
   },
 

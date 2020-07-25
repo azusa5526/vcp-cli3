@@ -50,7 +50,7 @@
           <td class="d-md-table-cell d-none"></td>
           <td class="d-sm-table-cell d-none"></td>
           <td colspan="2" class="text-right">GRAND TOTAL</td>
-          <td class="text-right">{{shoppingCart.total | currency}}</td>
+          <td width="100px" class="text-right">{{shoppingCart.total | currency}}</td>
         </tr>
         <tr v-if="shoppingCart.total !== shoppingCart.final_total">
           <td class="d-md-table-cell d-none"></td>
@@ -214,6 +214,7 @@ export default {
     cartHasItem () {
       const vm = this;
       if (vm.shoppingCart.carts === undefined) {
+        return 0;
       } else {
         if (vm.shoppingCart.carts.length === 0) {
           return false;
