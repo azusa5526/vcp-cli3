@@ -1,0 +1,44 @@
+.trace-order-wrap {
+  background-color: $third;
+  border: $primary 1.5px solid;
+  padding: 3.5rem 7rem;
+
+  @media screen and (max-width: 991px) {
+    padding: 3rem 3rem;
+  }
+  @media screen and (max-width: 767px) {
+    padding: 2rem 2.5rem;
+  }
+  @media screen and (max-width: 575px) {
+    padding: 2rem 1.5rem;
+  }
+
+  .form-control {
+    border: none;
+  }
+
+  table {
+    color: $secondary;
+    th {
+      color: $primary;
+      font-weight: normal;
+      padding-left: 0.35rem;
+      padding-right: 0.35rem;
+    }
+  }
+  
+  .orderList-table {
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-order-wrap {   
+    text-align: center;
+    color: $secondary;
+    margin-top: 3.5rem;
+
+    img {
+      height: 200px;
+      color: $secondary;
+    }
+  }
+}

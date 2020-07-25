@@ -1,0 +1,63 @@
+.dashboard-content-wrap {
+  margin: 2rem 7rem;
+
+  @media screen and (max-width: 1200px) {
+    margin: 2rem 5rem;
+  }
+
+  @media screen and (max-width: 991px) {
+    margin: 2rem 3rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    margin: 2rem 1.5rem;
+  }
+}
+
+.dashboard-table-wrap {
+  padding: 2rem 3rem 3rem 3rem;
+  border: $primary 1.5px solid;
+  background-color: $third;
+
+  table {
+    color: $secondary;
+    margin: 0;
+
+    td {
+      vertical-align: middle;
+    }
+
+  }
+
+  th {
+    font-weight: normal;
+    color: $primary;
+    text-align: center;
+  }
+}
+
+.modal {
+
+  .modal-content {
+    background-color: lighten($color: $third, $amount: 10);
+    border-radius: 0;
+
+    .modal-body {
+      color: $secondary;
+    }
+
+    .modal-title {
+      color: $third;
+    }
+
+    .modal-header {
+      border-radius: 0;
+    }
+
+  }
+
+  label {
+    color: $secondary;
+  }
+
+}

@@ -1,0 +1,29 @@
+.checkout-wrap {
+
+  th {
+    padding-left: 0.35rem;
+    padding-right: 0.35rem;
+  }
+
+  .modal-content {
+    min-height: 300px;
+    min-width: 250px;
+    max-width: 80vh;
+    max-height: 50vh;
+    background-image: url('~@/assets/img/modal_bg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+  }
+
+  .modal-body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 1rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    border: $secondary 1.5px solid;
+  }
+
+}

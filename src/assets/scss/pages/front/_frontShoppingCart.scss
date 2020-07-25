@@ -1,0 +1,100 @@
+.cart-wrap {
+  background-color: $third;
+  border: $primary 1.2px solid;
+  padding: 3.5rem 7rem;
+
+  @media screen and (max-width: 991px) {
+    padding: 3rem 3rem;
+  }
+
+  @media screen and (max-width: 767px) {
+    padding: 2rem 2.5rem;
+  }
+
+  @media screen and (max-width: 575px) {
+    padding: 2rem 1.5rem;
+  }
+
+  table {
+    color: $secondary;
+
+    th {
+      color: $primary;
+      font-weight: normal;
+    }
+  }
+
+  .form-control {
+    border: none;
+    border-radius: 0;
+  }
+
+  .input-group-append>.btn {
+    border-radius: 0;
+  }
+
+  .shopping-step {
+    display: flex;
+    flex-direction: row;
+
+    @media screen and (max-width: 767px) {
+      flex-direction: column;
+    }
+
+    .step {
+      display: flex;
+      flex: 1;
+      margin-left: 10px;
+      margin-right: 10px;
+      padding: 1rem;
+      color: $secondary;
+      justify-content: center;
+      align-items: center;
+
+      @media screen and (max-width: 767px) {
+        margin: 0 0 7px 0;
+        padding: 0.6rem;
+      }
+    }
+
+    h5 {
+      margin: 0;
+
+      @media screen and (max-width: 767px) {
+        font-size: $font-size-base;
+      }
+    }
+
+    .active-step {
+      color: $primary;
+    }
+  }
+
+}
+
+.emptyCart-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+
+  h4 {
+    color: $secondary;
+    margin-bottom: 1.5rem;
+
+    @media screen and (max-width: 575px) {
+      font-size: $font-size-lg;
+    }
+  }
+
+  .shopping-link {
+    width: 180px;
+    margin-bottom: 2.5rem;
+  }
+
+  img {
+    width: 80%;
+  }
+}

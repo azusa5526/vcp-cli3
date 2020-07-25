@@ -1,0 +1,22 @@
+@import "~bootstrap/scss/functions";    //套用變數的方法
+@import "./utils/variables";   //自定義變數
+@import "~bootstrap/scss/bootstrap";
+
+@import "./base/base.scss";
+@import "./components/back/dashboard";
+@import "./components/front/frontFooter";
+@import "./pages/front/frontProduct";
+@import "./pages/front/frontHome";
+@import "./pages/front/frontSingleProduct";
+@import "./components/front/frontSidebar";
+@import "./pages/front/frontSlideshow";
+@import "./pages/front/frontSlideProducts";
+@import "./components/front/frontNavbar";
+@import "./components/back/login";
+@import "./pages/front/frontShoppingCart";
+@import "./pages/front/frontCartItems";
+@import "./pages/front/frontOrderList";
+@import "./pages/front/frontCheckOrder";
+@import "./components/front/pgnation";
+@import "./pages/front/frontCheckout";
+

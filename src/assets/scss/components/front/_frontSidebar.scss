@@ -1,0 +1,104 @@
+.nav-wrap {
+  @media screen and (max-width: 767px) {
+    padding-left: 15px;
+    padding-right: 15px;
+  }
+
+  @media screen and (max-width: 575px) {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+}
+
+.side-categoryFilter {
+  .btn {
+    width: 100%;
+    color: $third;
+    margin: 0 auto;
+    text-align: center;
+    background-color: $secondary;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    padding: 1rem;
+
+    &:hover {
+      background-color: darken($color: $secondary, $amount: 5);
+      transition: ease-in-out;
+      transition-duration: 0.3s;
+    }
+
+    @media screen and (max-width: 768px) {
+      padding: 0.5rem;
+    }
+  }
+}
+
+.side-title {
+
+  h6 {
+    padding: 1.25rem;
+    color: $third;
+    margin: 0 auto;
+    text-align: center;
+    background-color: $primary;
+
+    @media screen and (max-width: 768px) {
+      padding: 0.8rem;
+    }
+  }
+
+}
+
+.side-clear {
+  background-color: $third;
+
+  &:hover {
+    background-color: lighten($color: $third, $amount: 10);
+    transition: ease-in-out;
+    transition-duration: 0.3s;
+  }
+
+  .btn {
+    width: 100%;
+    height: 45px;
+    color: $gray-100;
+    margin: 0 auto;
+    text-align: center;
+  }
+}
+
+#accordion {
+
+  .card {
+    border-radius: 0;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+    border-top: none;
+    border-right: none;
+    border-left: none;
+  }
+
+  .btn {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+  }
+
+  .btn-link {
+    color: $black;
+    text-decoration: none;
+  }
+
+  .card-header {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: $secondary;
+    border: none;
+    border-radius: 0;
+
+    @media screen and (max-width: 768px) {
+      padding: 0.7rem;
+    }
+  }
+}

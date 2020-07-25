@@ -1,0 +1,56 @@
+#frontSlideProducts {
+  .carousel-indicators {
+    margin-bottom: 0.5rem;
+  }
+
+  .carousel-inner {
+    height: 100% !important;
+  }
+  
+  .carousel-item {
+    height: 100%;
+  }
+  
+  .rwdimg {
+    display: block;
+    width: 100%;
+    min-height: 25vh;
+    padding-top: 20%;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+
+    @media screen and (max-width: 575px) {
+      min-height: 35vh;
+      background-size: cover;
+    }
+  }
+
+  .slide1 {
+    background-image: url('~@/assets/img/product_1_lg.png');
+  
+    @media screen and (max-width: 575px) {
+      background-image: url('~@/assets/img/product_1_xs.png');
+    }
+  
+  }
+  
+  .slide2 {
+    background-image: url('~@/assets/img/product_2_lg.png');
+  
+    @media screen and (max-width: 575px) {
+      background-image: url('~@/assets/img/product_2_xs.png');
+    }
+  
+  }
+  
+  .slide3 {
+    background-image: url('~@/assets/img/product_3_lg.png');
+  
+    @media screen and (max-width: 575px) {
+      background-image: url('~@/assets/img/product_3_xs.png');
+    }
+  }
+  
+}
+
