@@ -8,7 +8,7 @@
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img class="img" :src="product.imageUrl" @click="imgZoom" alt />
+              <img :src="product.imageUrl" class="img" @click="imgZoom" />
             </div>
           </div>
         </div>
