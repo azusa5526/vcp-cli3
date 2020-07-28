@@ -13,11 +13,11 @@
       </thead>
 
       <tbody class="cart-items">
-        <tr v-for="item in shoppingCart.carts" :key="item.id">
+        <tr :key="item.id" v-for="item in shoppingCart.carts">
           <td class="align-middle d-md-table-cell d-none">
             <div
-              class="product-preview d-md-block d-none"
               :style="{backgroundImage: `url(${item.product.imageUrl})`}"
+              class="product-preview d-md-block d-none"
             ></div>
           </td>
           <td class="align-middle text-left">
@@ -25,9 +25,9 @@
             <div class="text-primary" v-if="item.coupon">COUPON APPLIED: {{item.coupon.title}}</div>
           </td>
           <td class="align-middle d-sm-table-cell d-none qty-adjust">
-            <button class="btn btn-outline-secondary" @click="quantitySub(item)">-</button>
-            <input type="text" :value="item.qty" readonly="readonly" />
-            <button class="btn btn-outline-secondary" @click="quantityPlus(item)">+</button>
+            <button @click="quantitySub(item)" class="btn btn-outline-secondary">-</button>
+            <input :value="item.qty" readonly="readonly" type="text" />
+            <button @click="quantityPlus(item)" class="btn btn-outline-secondary">+</button>
           </td>
           <td class="align-middle">
             {{item.product.price | currency}} /{{item.total | currency}}
@@ -36,9 +36,9 @@
 
           <td class="align-middle">
             <button
-              type="button"
-              class="btn btn-outline-danger-light btn-sm"
               @click="removeCartItem(item.id)"
+              class="btn btn-outline-danger-light btn-sm"
+              type="button"
             >
               <i class="far fa-trash-alt"></i>
             </button>
@@ -49,13 +49,13 @@
         <tr>
           <td class="d-md-table-cell d-none"></td>
           <td class="d-sm-table-cell d-none"></td>
-          <td colspan="2" class="text-right">GRAND TOTAL</td>
-          <td width="100px" class="text-right">{{shoppingCart.total | currency}}</td>
+          <td class="text-right" colspan="2">GRAND TOTAL</td>
+          <td class="text-right" width="100px">{{shoppingCart.total | currency}}</td>
         </tr>
         <tr v-if="shoppingCart.total !== shoppingCart.final_total">
           <td class="d-md-table-cell d-none"></td>
           <td class="d-sm-table-cell d-none"></td>
-          <td colspan="2" class="text-right text-primary">DISCOUNT PRICE</td>
+          <td class="text-right text-primary" colspan="2">DISCOUNT PRICE</td>
           <td class="text-right text-primary">{{shoppingCart.final_total | currency}}</td>
         </tr>
       </tfoot>
@@ -63,13 +63,13 @@
 
     <div class="input-group mb-3 input-group-sm">
       <input
-        type="text"
         class="form-control"
         placeholder="PLEASE INPUT COUPON CODE"
+        type="text"
         v-model="couponCode"
       />
       <div class="input-group-append">
-        <button class="btn btn-primary" type="button" @click="addCouponCode">APPLY CODE</button>
+        <button @click="addCouponCode" class="btn btn-primary" type="button">APPLY CODE</button>
       </div>
     </div>
 

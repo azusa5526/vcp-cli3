@@ -2,23 +2,23 @@
   <div>
     <loading :active.sync="isLoading"></loading>
 
-    <FrontSlideshow class="mb-3" @gotoSingleProduct="getProduct"></FrontSlideshow>
+    <FrontSlideshow @gotoSingleProduct="getProduct" class="mb-3"></FrontSlideshow>
 
     <div class="mid-banner mb-3">
       <div class="mid-banner-img">
-        <div id="couponBtn" class="mid-banner-content" @click="copyCouponCode()">
+        <div @click="copyCouponCode()" class="mid-banner-content" id="couponBtn">
           <h4>BUILD PC DISCOUNT</h4>
           <p class="m-0">Click to get 10% off Coupon Code</p>
         </div>
       </div>
     </div>
 
-    <div id="heroProducts" class="mb-3">
+    <div class="mb-3" id="heroProducts">
       <div class="row">
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            class="link-block"
             @click="getProduct('-MA13AwgWT1qNex6b85M')"
+            class="link-block"
             href="#/front_single_product/-MA13AwgWT1qNex6b85M"
           >
             <div class="card">
@@ -36,8 +36,8 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            class="link-block"
             @click="getProduct('-M9y6Rpb6D6ntBcwB5XZ')"
+            class="link-block"
             href="#/front_single_product/-M9y6Rpb6D6ntBcwB5XZ"
           >
             <div class="card">
@@ -55,8 +55,8 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            class="link-block"
             @click="getProduct('-MBE7OLMRCOp_Z1Mkj48')"
+            class="link-block"
             href="#/front_single_product/-MBE7OLMRCOp_Z1Mkj48"
           >
             <div class="card">
@@ -74,8 +74,8 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            class="link-block"
             @click="getProduct('-MBE32QzaHahHEuGg3xQ')"
+            class="link-block"
             href="#/front_single_product/-MBE32QzaHahHEuGg3xQ"
           >
             <div class="card">
@@ -98,8 +98,8 @@
         <div class="col-12 col-lg-6 article-wrap">
           <div class="card bg-dark text-white">
             <div
-              class="article-img"
               :style="{backgroundImage: 'url(' + require('@/assets/img/pc.jpg') + ')'}"
+              class="article-img"
             ></div>
             <div class="card-img-overlay">
               <div class="article-content-wrap">
@@ -115,8 +115,8 @@
         <div class="col-12 col-lg-6 article-wrap">
           <div class="card bg-dark text-white">
             <div
-              class="article-img"
               :style="{backgroundImage: 'url(' + require('@/assets/img/radeon.jpg') + ')'}"
+              class="article-img"
             ></div>
             <div class="card-img-overlay">
               <div class="article-content-wrap">
@@ -163,7 +163,7 @@ export default {
     getProduct (id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
-      let heroProducts = vm.categoryFilterList();
+      const heroProducts = vm.categoryFilterList();
 
       localStorage.setItem('cateFilteredList', JSON.stringify(heroProducts));
 
@@ -185,7 +185,7 @@ export default {
 
     categoryFilterList () {
       const vm = this;
-      let tempProducts = vm.activatedProductFilterList();
+      const tempProducts = vm.activatedProductFilterList();
       tempProducts.reverse();
 
       return tempProducts.filter(function (item) {

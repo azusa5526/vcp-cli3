@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="login">
-      <form class="form-wrap" @submit.prevent="signin">
+      <form @submit.prevent="signin" class="form-wrap">
         <div class="login-img">
           <h1>
             <i class="fab fa-vuejs"></i>CP.com
@@ -9,24 +9,24 @@
         </div>
 
         <div class="login-content">
-          <label for="inputEmail" class="sr-only">Email address</label>
+          <label class="sr-only" for="inputEmail">Email address</label>
           <input
-            type="email"
-            id="inputEmail"
+            autofocus
             class="form-control mb-3"
-            v-model="user.username"
+            id="inputEmail"
             placeholder="Email address"
             required
-            autofocus
+            type="email"
+            v-model="user.username"
           />
-          <label for="inputPassword" class="sr-only">Password</label>
+          <label class="sr-only" for="inputPassword">Password</label>
           <input
-            type="password"
-            id="inputPassword "
             class="form-control mb-3"
-            v-model="user.password"
+            id="inputPassword "
             placeholder="Password"
             required
+            type="password"
+            v-model="user.password"
           />
           <div class="checkbox mb-3">
             <label class="remember-text">

@@ -15,14 +15,14 @@
         </thead>
 
         <tbody>
-          <tr v-for="item in orders" :key="item.id">
+          <tr :key="item.id" v-for="item in orders">
             <td>{{item.create_at | timestampToDate}}</td>
             <td>{{item.user.email}}</td>
             <td class="d-lg-table-cell d-none">
               <ul class="list-unstyled">
                 <li
-                  v-for="(product, id) in item.products"
                   :key="id"
+                  v-for="(product, id) in item.products"
                 >{{product.product.title}} / {{product.qty}} {{product.product.unit}}</li>
               </ul>
             </td>

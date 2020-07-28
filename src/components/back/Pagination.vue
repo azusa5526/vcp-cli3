@@ -2,30 +2,30 @@
   <div>
     <nav aria-label="Page navigation example">
       <ul class="pagination">
-        <li class="page-item" :class="{'disabled' : !pagination.has_pre}">
+        <li :class="{'disabled' : !pagination.has_pre}" class="page-item">
           <a
+            @click="changePage(pagination.current_page - 1)"
+            aria-label="Previous"
             class="page-link"
             href="#"
-            aria-label="Previous"
-            @click="changePage(pagination.current_page - 1)"
           >
             <span aria-hidden="true">&laquo;</span>
           </a>
         </li>
         <li
+          :class="{'active' : pagination.current_page == page}"
+          :key="page"
           class="page-item"
           v-for="page in pagination.total_pages"
-          :key="page"
-          :class="{'active' : pagination.current_page == page}"
         >
-          <a class="page-link" href="#" @click="changePage(page)">{{page}}</a>
+          <a @click="changePage(page)" class="page-link" href="#">{{page}}</a>
         </li>
-        <li class="page-item" :class="{'disabled' : !pagination.has_next}">
+        <li :class="{'disabled' : !pagination.has_next}" class="page-item">
           <a
+            @click="changePage(pagination.current_page + 1)"
+            aria-label="Next"
             class="page-link"
             href="#"
-            aria-label="Next"
-            @click="changePage(pagination.current_page + 1)"
           >
             <span aria-hidden="true">&raquo;</span>
           </a>

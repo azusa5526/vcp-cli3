@@ -14,7 +14,7 @@
           <th class="text-center sub-td">SUB</th>
         </thead>
         <tbody>
-          <tr v-for="item in order.products" :key="item.id">
+          <tr :key="item.id" v-for="item in order.products">
             <td class="align-middle text-left">{{item.product.title}}</td>
             <td class="align-middle text-center">{{item.qty}} {{item.product.unit}}</td>
             <td class="align-middle text-right">{{item.final_total | currency}}</td>
@@ -22,7 +22,7 @@
         </tbody>
         <tfoot>
           <tr>
-            <td colspan="2" class="text-right">GRAND TOTAL</td>
+            <td class="text-right" colspan="2">GRAND TOTAL</td>
             <td class="text-right">{{order.total | currency}}</td>
           </tr>
         </tfoot>
@@ -69,19 +69,19 @@
     </form>
 
     <div
+      aria-hidden="true"
+      aria-labelledby="exampleModalCenterTitle"
       class="modal fade"
       id="paymentCompeleted"
-      tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalCenterTitle"
-      aria-hidden="true"
+      tabindex="-1"
     >
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-body">
             <h4>AWESOME</h4>
             <p>YOUR PAYMENT COMPLETED</p>
-            <button class="btn btn-primary" @click="goToProducts">COUNTINUE SHOPPING!</button>
+            <button @click="goToProducts" class="btn btn-primary">COUNTINUE SHOPPING!</button>
           </div>
         </div>
       </div>

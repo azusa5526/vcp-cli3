@@ -9,14 +9,14 @@
       <div class="form-group">
         <label for="useremail">EMAIL</label>
         <input
-          type="email"
-          class="form-control mb-1"
-          name="email"
-          id="useremail"
-          v-validate="'required|email'"
-          v-model="form.user.email"
           :class="{'is-invalid' : errors.has('tel')}"
+          class="form-control mb-1"
+          id="useremail"
+          name="email"
           placeholder="PLEASE INPUT EMAIL"
+          type="email"
+          v-model="form.user.email"
+          v-validate="'required|email'"
         />
         <span class="text-danger-light" v-if="errors.has('email')">{{errors.first('email')}}</span>
       </div>
@@ -24,14 +24,14 @@
       <div class="form-group">
         <label for="username">ORDERER NAME</label>
         <input
-          type="text"
+          :class="{'is-invalid' : errors.has('name')}"
           class="form-control mb-1"
-          name="name"
           id="username"
+          name="name"
+          placeholder="INPUT NAME"
+          type="text"
           v-model="form.user.name"
           v-validate="'required'"
-          :class="{'is-invalid' : errors.has('name')}"
-          placeholder="INPUT NAME"
         />
         <span class="text-danger-light" v-if="errors.has('name')">NAME MUST BE INPUT</span>
       </div>
@@ -39,14 +39,14 @@
       <div class="form-group">
         <label for="usertel">PHONE NUMBER</label>
         <input
-          type="tel"
+          :class="{'is-invalid' : errors.has('tel')}"
           class="form-control mb-1"
-          name="tel"
           id="usertel"
+          name="tel"
+          placeholder="PLEASE INPUT PHONE NUMBER"
+          type="tel"
           v-model="form.user.tel"
           v-validate="'required'"
-          :class="{'is-invalid' : errors.has('tel')}"
-          placeholder="PLEASE INPUT PHONE NUMBER"
         />
         <span class="text-danger-light" v-if="errors.has('tel')">PHONE NUMBER MUST BE INPUT</span>
       </div>
@@ -60,14 +60,14 @@
       <div class="form-group">
         <label for="useraddress">ADDRESS</label>
         <input
-          type="address"
+          :class="{'is-invalid' : errors.has('address')}"
           class="form-control mb-1"
-          name="address"
           id="useraddress"
+          name="address"
+          placeholder="PLEASE INPUT ADDRESS"
+          type="address"
           v-model="form.user.address"
           v-validate="'required'"
-          :class="{'is-invalid' : errors.has('address')}"
-          placeholder="PLEASE INPUT ADDRESS"
         />
         <span class="text-danger-light" v-if="errors.has('address')">ADDRESS MUST BE INPUT</span>
       </div>
@@ -78,12 +78,12 @@
     <form>
       <div class="form-title">MESSAGE</div>
       <div class="form-group">
-        <textarea name id class="form-control mb-1" cols="30" rows="5" v-model="form.message"></textarea>
+        <textarea class="form-control mb-1" cols="30" id name rows="5" v-model="form.message"></textarea>
       </div>
 
       <div class="d-flex justify-content-between step-control">
         <router-link class="btn btn-primary" to="front_cart_items">BACK TO CART</router-link>
-        <button class="btn btn-fourth-dark" @click.prevent="createOrder">SEND ORDER</button>
+        <button @click.prevent="createOrder" class="btn btn-fourth-dark">SEND ORDER</button>
       </div>
     </form>
   </div>

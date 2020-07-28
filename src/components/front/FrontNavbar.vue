@@ -6,13 +6,13 @@
       </span>
     </router-link>
     <button
-      class="navbar-toggler"
-      type="button"
-      data-toggle="collapse"
-      data-target="#navbarsExampleDefault"
       aria-controls="navbarsExampleDefault"
       aria-expanded="false"
       aria-label="Toggle navigation"
+      class="navbar-toggler"
+      data-target="#navbarsExampleDefault"
+      data-toggle="collapse"
+      type="button"
     >
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -35,7 +35,7 @@
           </router-link>
         </li>
         <li>
-          <a class="text-fourth nav-link mr-1" href="#" v-if="is_login" @click="signOut">
+          <a @click="signOut" class="text-fourth nav-link mr-1" href="#" v-if="is_login">
             SIGN OUT
             <i class="fas fa-sign-out-alt ml-1"></i>
           </a>
@@ -81,7 +81,7 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/user/check`;
 
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         vm.is_login = response.data.success;
       });
     },
@@ -90,7 +90,7 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/logout`;
 
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         if (response.data.success) {
           vm.is_login = false;
           vm.$router.push('/home');

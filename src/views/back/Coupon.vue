@@ -4,13 +4,13 @@
 
     <div class="dashboard-table-wrap mb-3">
       <div class="text-right mb-3">
-        <button class="btn btn-primary" @click="openModal(true)">ADD COUPON</button>
+        <button @click="openModal(true)" class="btn btn-primary">ADD COUPON</button>
       </div>
       <table class="table">
         <thead>
           <tr>
             <th>COUPON NAME</th>
-            <th width="15%" class="text-center">DISCOUNT RATE</th>
+            <th class="text-center" width="15%">DISCOUNT RATE</th>
             <th width="15%">DUE TO</th>
             <th width="15%">ACTIVE</th>
             <th width="15%">EDIT</th>
@@ -18,7 +18,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="item in coupons" :key="item.id">
+          <tr :key="item.id" v-for="item in coupons">
             <td>{{item.title}}</td>
             <td class="text-center">{{item.percent}}%</td>
             <td class="text-center">{{item.due_date}}</td>
@@ -28,12 +28,12 @@
             </td>
             <td class="text-center">
               <button
-                class="btn btn-outline-primary btn-sm mr-1"
                 @click="openModal(false, item)"
+                class="btn btn-outline-primary btn-sm mr-1"
               >EDIT</button>
               <button
-                class="btn btn btn-outline-danger btn-sm"
                 @click="openDeleteCouponModal(item)"
+                class="btn btn btn-outline-danger btn-sm"
               >DELE</button>
             </td>
           </tr>
@@ -44,12 +44,12 @@
     <Pagination :pagination="pagination" @changePage="getCoupons"></Pagination>
 
     <div
+      aria-hidden="true"
+      aria-labelledby="exampleModalLabel"
       class="modal fade"
       id="couponModal"
-      tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      tabindex="-1"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
@@ -57,7 +57,7 @@
             <h5 class="modal-title" id="exampleModalLabel">
               <span>ADD COUPON</span>
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -67,10 +67,10 @@
                 <div class="form-group">
                   <label for="title">COUPON TITLE</label>
                   <input
-                    type="text"
                     class="form-control"
                     id="title"
                     placeholder="INPUT COUPON TITLE"
+                    type="text"
                     v-model="tempCoupon.title"
                   />
                 </div>
@@ -79,10 +79,10 @@
                   <div class="form-group col-md-12">
                     <label for="category">COUPON CODE</label>
                     <input
-                      type="text"
                       class="form-control"
                       id="category"
                       placeholder="INPUT COUPON CODE"
+                      type="text"
                       v-model="tempCoupon.code"
                     />
                   </div>
@@ -92,10 +92,10 @@
                   <div class="form-group col-md-12">
                     <label for="origin_price">DUE TO</label>
                     <input
-                      type="date"
                       class="form-control"
                       id="origin_price"
                       placeholder="INPUT DUE TO"
+                      type="date"
                       v-model="tempCoupon.due_date"
                     />
                   </div>
@@ -105,10 +105,10 @@
                   <div class="form-group col-md-12">
                     <label for="origin_price">DISCOUNT RATE</label>
                     <input
-                      type="number"
                       class="form-control"
                       id="origin_price"
                       placeholder="INPUT DISCOUNT RATE"
+                      type="number"
                       v-model="tempCoupon.percent"
                     />
                   </div>
@@ -119,12 +119,12 @@
                 <div class="form-group">
                   <div class="form-check">
                     <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="is_enabled"
-                      v-model="tempCoupon.is_enabled"
-                      :true-value="1"
                       :false-value="0"
+                      :true-value="1"
+                      class="form-check-input"
+                      id="is_enabled"
+                      type="checkbox"
+                      v-model="tempCoupon.is_enabled"
                     />
                     <label class="form-check-label" for="is_enabled">ENABLE</label>
                   </div>
@@ -133,8 +133,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-third" data-dismiss="modal">CANCEL</button>
-            <button type="button" class="btn btn-primary" @click="updateCoupon">
+            <button class="btn btn-third" data-dismiss="modal" type="button">CANCEL</button>
+            <button @click="updateCoupon" class="btn btn-primary" type="button">
               <i class="fas fa-circle-notch fa-spin" v-if="status.itemUpdating"></i> ACCEPT
             </button>
           </div>
@@ -143,12 +143,12 @@
     </div>
 
     <div
+      aria-hidden="true"
+      aria-labelledby="exampleModalLabel"
       class="modal fade"
       id="delCouponModal"
-      tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      tabindex="-1"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
@@ -156,7 +156,7 @@
             <h5 class="modal-title" id="exampleModalLabel">
               <span>DELETE COUPON</span>
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -165,8 +165,8 @@
             <strong class="text-danger">{{tempCoupon.title}}</strong> ( COUPON CANNOT BE RESTORE AFTER DELETION )
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-third" data-dismiss="modal">CANCEL</button>
-            <button type="button" class="btn btn-danger" @click="deleteCoupon">ACCEPT</button>
+            <button class="btn btn-third" data-dismiss="modal" type="button">CANCEL</button>
+            <button @click="deleteCoupon" class="btn btn-danger" type="button">ACCEPT</button>
           </div>
         </div>
       </div>
@@ -254,7 +254,7 @@ export default {
 
     deleteCoupon () {
       const vm = this;
-      let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${vm.tempCoupon.id}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${vm.tempCoupon.id}`;
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
           $('#delCouponModal').modal('hide');

@@ -7,13 +7,13 @@
         </span>
       </router-link>
       <button
-        class="navbar-toggler"
-        type="button"
-        data-toggle="collapse"
-        data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault"
         aria-expanded="false"
         aria-label="Toggle navigation"
+        class="navbar-toggler"
+        data-target="#navbarsExampleDefault"
+        data-toggle="collapse"
+        type="button"
       >
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -33,7 +33,7 @@
 
         <ul class="navbar-nav align-items-center ml-3">
           <li>
-            <a class="text-fourth nav-link mr-2" href="#" v-if="is_login" @click="signOut">
+            <a @click="signOut" class="text-fourth nav-link mr-2" href="#" v-if="is_login">
               SIGN OUT
               <i class="fas fa-sign-out-alt ml-1"></i>
             </a>

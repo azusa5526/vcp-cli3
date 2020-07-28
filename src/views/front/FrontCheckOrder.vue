@@ -5,15 +5,15 @@
     <div class="trace-order-wrap">
       <div class="input-group mb-4">
         <input
-          type="text"
+          aria-describedby="basic-addon2"
+          aria-label="Order ID"
           class="form-control"
           placeholder="INPUT ORDER ID"
-          aria-label="Order ID"
-          aria-describedby="basic-addon2"
+          type="text"
           v-model="inputOrderId"
         />
         <div class="input-group-append">
-          <button class="btn btn-primary" type="button" @click="getOrderById">SEARCH</button>
+          <button @click="getOrderById" class="btn btn-primary" type="button">SEARCH</button>
         </div>
       </div>
 
@@ -35,7 +35,7 @@
               <th class="text-center">SUB</th>
             </thead>
             <tbody>
-              <tr v-for="item in order.products" :key="item.id">
+              <tr :key="item.id" v-for="item in order.products">
                 <td class="align-middle text-left">{{item.product.title}}</td>
                 <td class="align-middle text-center">{{item.qty}} {{item.product.unit}}</td>
                 <td class="align-middle text-right">{{item.final_total | currency}}</td>
@@ -43,7 +43,7 @@
             </tbody>
             <tfoot>
               <tr>
-                <td colspan="2" class="text-right">GRAND TOTAL</td>
+                <td class="text-right" colspan="2">GRAND TOTAL</td>
                 <td class="text-right">{{order.total | currency}}</td>
               </tr>
             </tfoot>

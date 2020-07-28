@@ -8,6 +8,7 @@ import VueAxios from 'vue-axios';
 import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
+import VeeValidate from 'vee-validate';
 
 import './bus';
 import currencyFilter from './filters/currency';
@@ -17,6 +18,8 @@ Vue.config.productionTip = false;
 
 Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
+
+Vue.use(VeeValidate);
 
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
@@ -50,6 +53,6 @@ new Vue({
 //   return originalPush.call(this, location).catch(err => err);
 // };
 
-// router.afterEach((to, from, next) => {
-//   window.scrollTo(0, 0);
-// });
+router.afterEach((to, from, next) => {
+  window.scrollTo(0, 0);
+});

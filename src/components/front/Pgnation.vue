@@ -4,23 +4,23 @@
       <ul class="pagination">
         <li :class="{'disabled' : !pagination.has_pre}">
           <a
-            class="page-link"
-            aria-label="Previous"
             @click="changePage(pagination.current_page - 1)"
+            aria-label="Previous"
+            class="page-link"
           >
             <i class="fas fa-angle-left" />
           </a>
         </li>
         <li
+          :class="{'active' : pagination.current_page === page}"
+          :key="page"
           class="page-item"
           v-for="page in pagination.total_pages"
-          :key="page"
-          :class="{'active' : pagination.current_page === page}"
         >
-          <a class="page-link" @click="changePage(page)">{{page}}</a>
+          <a @click="changePage(page)" class="page-link">{{page}}</a>
         </li>
         <li :class="{'disabled' : !pagination.has_next}">
-          <a class="page-link" aria-label="Next" @click="changePage(pagination.current_page + 1)">
+          <a @click="changePage(pagination.current_page + 1)" aria-label="Next" class="page-link">
             <i class="fas fa-angle-right" />
           </a>
         </li>

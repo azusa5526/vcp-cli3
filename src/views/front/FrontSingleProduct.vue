@@ -3,12 +3,12 @@
     <loading :active.sync="isLoading"></loading>
 
     <div class="hero-decorate mt-3" style="border-top: #F68657 5px solid;" v-if="isHero"></div>
-    <div class="product-header" :class="{'mt-3' : !isHero}">
+    <div :class="{'mt-3' : !isHero}" class="product-header">
       <div class="row justify-content-center">
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img :src="product.imageUrl" class="img" @click="imgZoom" />
+              <img :src="product.imageUrl" @click="imgZoom" class="img" />
             </div>
           </div>
         </div>
@@ -38,23 +38,23 @@
           <div class="product-input">
             <div class="quantity">
               <span class="quantity-title">QUANTITY</span>
-              <button class="btn btn-outline-third" @click="quantitySub(product)">-</button>
-              <input type="text" :value="product.num" readonly="readonly" />
-              <button class="btn btn-outline-third" @click="quantityPlus(product)">+</button>
+              <button @click="quantitySub(product)" class="btn btn-outline-third">-</button>
+              <input :value="product.num" readonly="readonly" type="text" />
+              <button @click="quantityPlus(product)" class="btn btn-outline-third">+</button>
             </div>
 
             <div class="buy-option">
               <button
-                type="button"
-                class="btn btn-primary mr-1percent"
                 @click="addToCart(product.id, true, product.num)"
+                class="btn btn-primary mr-1percent"
+                type="button"
               >
                 <i class="fas fa-circle-notch fa-spin" v-if="clickedButton === 'direct'"></i> BUY NOW
               </button>
               <button
-                type="button"
-                class="btn btn-fourth-dark"
                 @click="addToCart(product.id, false, product.num)"
+                class="btn btn-fourth-dark"
+                type="button"
               >
                 <i class="fas fa-circle-notch fa-spin" v-if="clickedButton === 'non-direct'"></i> ADD TO CART
               </button>
@@ -84,19 +84,19 @@
         </div>
 
         <div
+          :key="index"
           class="col-md-3 col-sm-6 col-12 mb-4 recommand-hover"
           v-for="(item, index) in recommandProducts"
-          :key="index"
         >
           <a
-            class="link-block"
             :href="'#/front_single_product/' + item.id"
             @click="getRecommandProduct(item.id)"
+            class="link-block"
           >
             <div class="card shadow-sm">
               <div
-                style="height: 200px; background-size: contain; background-repeat: no-repeat; background-position: center;"
                 :style="{backgroundImage: `url(${item.imageUrl})`}"
+                style="height: 200px; background-size: contain; background-repeat: no-repeat; background-position: center;"
               ></div>
               <div class="card-body">
                 <h6 class="card-title">{{item.title}}</h6>
@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import $ from 'jquery';
+/* global $ */
 
 export default {
   data () {
@@ -294,13 +294,13 @@ export default {
     },
 
     imgZoom () {
-      /* eslint-disable */
       $('.img').elevateZoom({
         tint: true,
         tintColour: '#F90',
         tintOpacity: 0.5
       });
     }
+
   },
 
   created () {

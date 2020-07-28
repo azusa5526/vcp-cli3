@@ -5,19 +5,19 @@
     <div class="container my-4" v-if="cartHasItem">
       <div class="cart-wrap">
         <div class="shopping-step mb-4">
-          <div class="step" :class="{'active-step' : activedPage === 'FrontCartItems'}">
+          <div :class="{'active-step' : activedPage === 'FrontCartItems'}" class="step">
             <h5>
               CHECK CART
               <i class="fas fa-search ml-1"></i>
             </h5>
           </div>
-          <div class="step" :class="{'active-step' : activedPage === 'FrontOrderList'}">
+          <div :class="{'active-step' : activedPage === 'FrontOrderList'}" class="step">
             <h5>
               FILL INFO
               <i class="fas fa-pen-nib ml-1"></i>
             </h5>
           </div>
-          <div class="step" :class="{'active-step' : activedPage === 'FrontCheckout'}">
+          <div :class="{'active-step' : activedPage === 'FrontCheckout'}" class="step">
             <h5>
               PAYMENT LIST
               <i class="fas fa-credit-card ml-1"></i>

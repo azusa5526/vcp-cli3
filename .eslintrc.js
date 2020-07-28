@@ -13,15 +13,12 @@ module.exports = {
   rules: {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
-    "semi": [2, "always"],
-    "no-extra-semi": 0,
-    'generator-star-spacing': 'off',
-    'space-before-function-paren': [
-      'error',
-      {
-        anonymous: 'ignore',
-        named: 'ignore'
-      }
-    ],
+    semi: [2, 'always'],
+    'no-extra-semi': 0,
+    'space-before-function-paren': ['error', {
+      anonymous: 'always',
+      named: 'always',
+      asyncArrow: 'always'
+    }]
   }
-}
+};

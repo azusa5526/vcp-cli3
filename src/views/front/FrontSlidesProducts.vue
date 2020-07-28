@@ -1,14 +1,14 @@
 <template>
   <div
-    id="frontSlideProducts"
     class="carousel slide full"
-    data-ride="carousel"
     data-interval="4000"
+    data-ride="carousel"
+    id="frontSlideProducts"
   >
     <ol class="carousel-indicators">
-      <li data-target="#frontSlideProducts" data-slide-to="0" class="active"></li>
-      <li data-target="#frontSlideProducts" data-slide-to="1"></li>
-      <li data-target="#frontSlideProducts" data-slide-to="2"></li>
+      <li class="active" data-slide-to="0" data-target="#frontSlideProducts"></li>
+      <li data-slide-to="1" data-target="#frontSlideProducts"></li>
+      <li data-slide-to="2" data-target="#frontSlideProducts"></li>
     </ol>
     <div class="carousel-inner">
       <div class="carousel-item active">
@@ -21,12 +21,12 @@
         <div class="rwdimg slide3"></div>
       </div>
     </div>
-    <a class="carousel-control-prev" href="#frontSlideProducts" role="button" data-slide="prev">
-      <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <a class="carousel-control-prev" data-slide="prev" href="#frontSlideProducts" role="button">
+      <span aria-hidden="true" class="carousel-control-prev-icon"></span>
       <span class="sr-only">Previous</span>
     </a>
-    <a class="carousel-control-next" href="#frontSlideProducts" role="button" data-slide="next">
-      <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <a class="carousel-control-next" data-slide="next" href="#frontSlideProducts" role="button">
+      <span aria-hidden="true" class="carousel-control-next-icon"></span>
       <span class="sr-only">Next</span>
     </a>
   </div>

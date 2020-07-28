@@ -15,15 +15,15 @@
       <div class="col-xl-10 col-lg-9 col-md-9 col-sm-12 col-12 product-wrap">
         <div class="row">
           <div
+            :key="index"
             class="col-2xl-3 col-xl-4 col-lg-6 col-md-6 col-sm-6 mb-4 product-hover card-wrap"
             v-for="(item, index) in productsInWindowList"
-            :key="index"
           >
             <a
-              class="link-block"
               :href="'#/front_single_product/' + item.id"
               @click="getProduct(item.id)"
               @click.middle="getProduct(item.id)"
+              class="link-block"
             >
               <div class="card border-0 shadow-sm">
                 <div class="promote-wrap" v-if="item.category.indexOf('hero') !== -1">
@@ -32,8 +32,8 @@
                 </div>
 
                 <div
-                  style="height: 300px; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #FFFFFF;"
                   :style="{backgroundImage: `url(${item.imageUrl})`}"
+                  style="height: 300px; background-size: contain; background-position: center; background-repeat: no-repeat; background-color: #FFFFFF;"
                 ></div>
                 <div class="card-body">
                   <h5 class="card-title">{{item.title}}</h5>
@@ -52,10 +52,10 @@
 
         <div class="row justify-content-center">
           <Pgnation
-            v-if="filteredProducts.length !== 0"
-            class="my-4"
             :pagination="pgnation"
             @changePage="changeCurrentPage"
+            class="my-4"
+            v-if="filteredProducts.length !== 0"
           ></Pgnation>
         </div>
       </div>
@@ -140,7 +140,7 @@ export default {
 
     categoryFilterList () {
       const vm = this;
-      let tempProducts = vm.activatedProductFilterList();
+      const tempProducts = vm.activatedProductFilterList();
       tempProducts.reverse();
 
       vm.categoryFilter = vm.$route.params.categoryFilter;
@@ -161,7 +161,7 @@ export default {
       if (vm.productsFilter.length === 0) {
         return tempProducts;
       } else {
-        for (let filter of vm.productsFilter) {
+        for (const filter of vm.productsFilter) {
           tempProducts = tempProducts.filter(function (item) {
             return item.category.indexOf(filter) !== -1;
           });
@@ -177,7 +177,7 @@ export default {
 
     pgnationCounter () {
       const vm = this;
-      let productsLength = vm.filteredProducts.length;
+      const productsLength = vm.filteredProducts.length;
 
       vm.pgnation.total_pages = Number(
         Math.floor(productsLength / vm.pgnation.page_size) + 1
@@ -198,11 +198,11 @@ export default {
 
     pageSpliter () {
       const vm = this;
-      let pageMinIndex =
+      const pageMinIndex =
         vm.pgnation.current_page * vm.pgnation.page_size -
         vm.pgnation.page_size +
         1;
-      let pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
+      const pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
 
       vm.productsInWindow = [];
       vm.filteredProducts.forEach(function (item, index) {
@@ -224,15 +224,15 @@ export default {
   computed: {
     productsInWindowList () {
       const vm = this;
-      let productsInWindow = [];
+      const productsInWindow = [];
 
       vm.filteredProducts = vm.productsFilterList();
 
-      let pageMinIndex =
+      const pageMinIndex =
         vm.pgnation.current_page * vm.pgnation.page_size -
         vm.pgnation.page_size +
         1;
-      let pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
+      const pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
 
       vm.filteredProducts.forEach(function (item, index) {
         const num = index + 1;

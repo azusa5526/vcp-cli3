@@ -1,18 +1,18 @@
 <template>
   <div class="message-alert">
     <div
-      class="alert alert-dismissible"
       :class="'alert-' + item.status"
-      v-for="(item, i) in messages"
       :key="i"
+      class="alert alert-dismissible"
       style="border: #181818 1px solid;"
+      v-for="(item, i) in messages"
     >
       {{item.message}}
       <button
-        type="button"
-        class="close"
         @click="removeMessage(i)"
         aria-label="Close"
+        class="close"
+        type="button"
       >
         <span aria-hidden="true">&times;</span>
       </button>

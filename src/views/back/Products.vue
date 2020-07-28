@@ -4,7 +4,7 @@
 
     <div class="dashboard-table-wrap my-3">
       <div class="text-right mb-3">
-        <button class="btn btn-primary" @click="openModal(true)">ADD PRODUCT</button>
+        <button @click="openModal(true)" class="btn btn-primary">ADD PRODUCT</button>
       </div>
 
       <table class="table">
@@ -20,7 +20,7 @@
         </thead>
 
         <tbody>
-          <tr v-for="item in products" :key="item.id">
+          <tr :key="item.id" v-for="item in products">
             <td>{{item.category}}</td>
             <td>{{item.title}}</td>
             <td class="text-right">{{item.origin_price | currency}}</td>
@@ -31,12 +31,12 @@
             </td>
             <td class="text-center">
               <button
-                class="btn btn-outline-primary btn-sm mr-1"
                 @click="openModal(false, item)"
+                class="btn btn-outline-primary btn-sm mr-1"
               >EDIT</button>
               <button
-                class="btn btn btn-outline-danger btn-sm"
                 @click="openDeleteProductModal(item)"
+                class="btn btn btn-outline-danger btn-sm"
               >DELE</button>
             </td>
           </tr>
@@ -47,12 +47,12 @@
     <Pagination :pagination="pagination" @changePage="getProducts"></Pagination>
 
     <div
+      aria-hidden="true"
+      aria-labelledby="exampleModalLabel"
       class="modal fade"
       id="productModal"
-      tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      tabindex="-1"
     >
       <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content border-0">
@@ -60,7 +60,7 @@
             <h5 class="modal-title" id="exampleModalLabel">
               <span>ADD PRODUCT</span>
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -70,10 +70,10 @@
                 <div class="form-group">
                   <label for="image">IMAGE LINK</label>
                   <input
-                    type="text"
                     class="form-control"
                     id="image"
                     placeholder="INPUT IMG LINK"
+                    type="text"
                     v-model="tempProduct.imageUrl"
                   />
                 </div>
@@ -83,23 +83,23 @@
                     <i class="fas fa-circle-notch fa-spin" v-if="status.fileUploading"></i>
                   </label>
                   <input
-                    type="file"
-                    id="customFile"
-                    class="form-control"
-                    ref="files"
                     @change="uploadFile"
+                    class="form-control"
+                    id="customFile"
+                    ref="files"
+                    type="file"
                   />
                 </div>
-                <img class="img-fluid" :src="tempProduct.imageUrl" alt />
+                <img :src="tempProduct.imageUrl" alt class="img-fluid" />
               </div>
               <div class="col-sm-8">
                 <div class="form-group">
                   <label for="title">PRODUCT TITLE</label>
                   <input
-                    type="text"
                     class="form-control"
                     id="title"
                     placeholder="PRODUCT TITLE"
+                    type="text"
                     v-model="tempProduct.title"
                   />
                 </div>
@@ -108,20 +108,20 @@
                   <div class="form-group col-md-6">
                     <label for="category">CATEGORY</label>
                     <input
-                      type="text"
                       class="form-control"
                       id="category"
                       placeholder="INPUT CATEGORY"
+                      type="text"
                       v-model="tempProduct.category"
                     />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="price">UNIT</label>
                     <input
-                      type="unit"
                       class="form-control"
                       id="unit"
                       placeholder="INPUT UNIT"
+                      type="unit"
                       v-model="tempProduct.unit"
                     />
                   </div>
@@ -131,20 +131,20 @@
                   <div class="form-group col-md-6">
                     <label for="origin_price">ORIG PRICE</label>
                     <input
-                      type="number"
                       class="form-control"
                       id="origin_price"
                       placeholder="INPUT ORIG PRICE"
+                      type="number"
                       v-model="tempProduct.origin_price"
                     />
                   </div>
                   <div class="form-group col-md-6">
                     <label for="price">SELL PRICE</label>
                     <input
-                      type="number"
                       class="form-control"
                       id="price"
                       placeholder="INPUT SELL PRICE"
+                      type="number"
                       v-model="tempProduct.price"
                     />
                   </div>
@@ -153,34 +153,34 @@
                 <div class="form-group">
                   <label for="content">PROD CONTENT</label>
                   <textarea
-                    type="text"
                     class="form-control"
                     id="content"
                     placeholder="INPUT PROD CONTENT"
                     rows="4"
+                    type="text"
                     v-model="tempProduct.content"
                   ></textarea>
                 </div>
                 <div class="form-group">
                   <label for="description">PROD DESCRIPTION</label>
                   <textarea
-                    type="text"
                     class="form-control"
                     id="description"
                     placeholder="INPUT PROD DESCRIPTION"
                     rows="4"
+                    type="text"
                     v-model="tempProduct.description"
                   ></textarea>
                 </div>
                 <div class="form-group">
                   <div class="form-check">
                     <input
-                      class="form-check-input"
-                      type="checkbox"
-                      id="is_enabled"
-                      v-model="tempProduct.is_enabled"
-                      :true-value="1"
                       :false-value="0"
+                      :true-value="1"
+                      class="form-check-input"
+                      id="is_enabled"
+                      type="checkbox"
+                      v-model="tempProduct.is_enabled"
                     />
                     <label class="form-check-label" for="is_enabled">ENABLE</label>
                   </div>
@@ -189,8 +189,8 @@
             </div>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-third" data-dismiss="modal">CANCEL</button>
-            <button type="button" class="btn btn-primary" @click="updateProduct">
+            <button class="btn btn-third" data-dismiss="modal" type="button">CANCEL</button>
+            <button @click="updateProduct" class="btn btn-primary" type="button">
               <i class="fas fa-circle-notch fa-spin" v-if="status.itemUpdating"></i> ACCEPT
             </button>
           </div>
@@ -199,12 +199,12 @@
     </div>
 
     <div
+      aria-hidden="true"
+      aria-labelledby="exampleModalLabel"
       class="modal fade"
       id="delProductModal"
-      tabindex="-1"
       role="dialog"
-      aria-labelledby="exampleModalLabel"
-      aria-hidden="true"
+      tabindex="-1"
     >
       <div class="modal-dialog" role="document">
         <div class="modal-content border-0">
@@ -212,7 +212,7 @@
             <h5 class="modal-title" id="exampleModalLabel">
               <span>DELETE PRODUCT</span>
             </h5>
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <button aria-label="Close" class="close" data-dismiss="modal" type="button">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
@@ -221,8 +221,8 @@
             <strong class="text-danger">{{tempProduct.title}}</strong> ( ITEM CANNOT BE RESTORE AFTER DELETION )
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" @click="deleteProduct">ACCEPT</button>
-            <button type="button" class="btn btn-outline-secondary" data-dismiss="modal">CANCEL</button>
+            <button @click="deleteProduct" class="btn btn-danger" type="button">ACCEPT</button>
+            <button class="btn btn-outline-secondary" data-dismiss="modal" type="button">CANCEL</button>
           </div>
         </div>
       </div>
@@ -310,7 +310,7 @@ export default {
 
     deleteProduct () {
       const vm = this;
-      let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${vm.tempProduct.id}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${vm.tempProduct.id}`;
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
           $('#delProductModal').modal('hide');

@@ -29,7 +29,7 @@
               </li>
             </ul>
 
-            <ul ul class="px-4">
+            <ul class="px-4" ul>
               <li>
                 <h3 class="text-center">Social</h3>
               </li>
