@@ -49,7 +49,7 @@ router.beforeEach((to, next) => {
 });
 
 const originalPush = router.prototype.push;
-router.prototype.push = function push(location) {
+router.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err);
 };
 
