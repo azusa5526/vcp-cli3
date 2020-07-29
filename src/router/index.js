@@ -1,6 +1,6 @@
 /* eslint-disable indent */
 import Vue from 'vue';
-import VueRouter from 'vue-router';
+import Router from 'vue-router';
 
 import Login from '@/views/back/Login';
 import Dashboard from '@/components/back/Dashboard';
@@ -18,7 +18,7 @@ import FrontCheckOrder from '@/views/front/FrontCheckOrder';
 import FrontCartItems from '@/views/front/FrontCartItems';
 import FrontSingleProduct from '@/views/front/FrontSingleProduct';
 
-Vue.use(VueRouter);
+Vue.use(Router);
 
 const routes = [{
     path: '*',
@@ -120,7 +120,7 @@ const routes = [{
   }
 ];
 
-const router = new VueRouter({
+const router = new Router({
   routes
 });
 

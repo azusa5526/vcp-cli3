@@ -1,6 +1,7 @@
 import Vue from 'vue';
 import App from './App.vue';
 import router from './router';
+import Router from 'vue-router';
 import store from './store';
 
 import axios from 'axios';
@@ -9,6 +10,7 @@ import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VeeValidate from 'vee-validate';
+import Blowup from 'blowup/lib/blowup';
 
 import './bus';
 import currencyFilter from './filters/currency';
@@ -20,6 +22,7 @@ Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
 
 Vue.use(VeeValidate);
+Vue.use(Blowup);
 
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
@@ -31,10 +34,10 @@ new Vue({
   render: h => h(App)
 }).$mount('#app');
 
-router.beforeEach((to, next) => {
+router.beforeEach((to, from, next) => {
   if (to.meta.requiresAuth) {
     const api = `${process.env.VUE_APP_API_PATH}/api/user/check`;
-    axios.post(api).then((response) => {
+    axios.post(api).then(response => {
       if (response.data.success) {
         next();
       } else {
@@ -48,8 +51,8 @@ router.beforeEach((to, next) => {
   }
 });
 
-const originalPush = router.prototype.push;
-router.prototype.push = function push (location) {
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push (location) {
   return originalPush.call(this, location).catch(err => err);
 };
 

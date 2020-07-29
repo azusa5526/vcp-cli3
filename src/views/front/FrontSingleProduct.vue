@@ -8,7 +8,7 @@
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img :src="product.imageUrl" @click="imgZoom" class="img" />
+              <img :src="product.imageUrl" class="img" @click="imgZoom"/>
             </div>
           </div>
         </div>
@@ -294,12 +294,20 @@ export default {
     },
 
     imgZoom () {
-      $('.img').elevateZoom({
-        tint: true,
-        tintColour: '#F90',
-        tintOpacity: 0.5
+      $(document).ready(function () {
+        $('img').blowup({
+          background: '#FCEBB6'
+        });
       });
     }
+
+    // imgZoom () {
+    //   $('.img').elevateZoom({
+    //     tint: true,
+    //     tintColour: '#F90',
+    //     tintOpacity: 0.5
+    //   });
+    // }
 
   },
 
@@ -311,5 +319,6 @@ export default {
     this.getSingleProduct();
     this.getCart();
   }
+
 };
 </script>
