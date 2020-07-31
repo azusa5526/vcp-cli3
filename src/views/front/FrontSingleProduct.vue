@@ -8,7 +8,7 @@
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img :src="product.imageUrl" class="img" @click="imgZoom"/>
+              <img :src="product.imageUrl"/>
             </div>
           </div>
         </div>
@@ -115,8 +115,6 @@
 </template>
 
 <script>
-/* global $ */
-
 export default {
   data () {
     return {
@@ -291,23 +289,7 @@ export default {
       }
 
       this.recommandProducts = newArr;
-    },
-
-    imgZoom () {
-      $(document).ready(function () {
-        $('img').blowup({
-          background: '#FCEBB6'
-        });
-      });
     }
-
-    // imgZoom () {
-    //   $('.img').elevateZoom({
-    //     tint: true,
-    //     tintColour: '#F90',
-    //     tintOpacity: 0.5
-    //   });
-    // }
 
   },
 

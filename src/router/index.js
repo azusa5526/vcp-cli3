@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import Vue from 'vue';
 import Router from 'vue-router';
 
@@ -20,7 +19,8 @@ import FrontSingleProduct from '@/views/front/FrontSingleProduct';
 
 Vue.use(Router);
 
-const routes = [{
+const routes = [
+  {
     path: '*',
     redirect: '/home'
   },
@@ -38,7 +38,8 @@ const routes = [{
     path: '/',
     name: 'FrontEnd',
     component: FrontEnd,
-    children: [{
+    children: [
+      {
         path: 'home',
         name: 'Home',
         component: FrontHome
@@ -59,7 +60,8 @@ const routes = [{
         path: 'shopping_cart',
         name: 'shoppingCart',
         component: FrontShoppingCart,
-        children: [{
+        children: [
+          {
             path: 'front_cart_items',
             name: 'FrontCartItems',
             component: FrontCartItems
@@ -74,7 +76,6 @@ const routes = [{
             name: 'FrontCheckout',
             component: FrontCheckout
           }
-
         ]
       },
 
@@ -83,7 +84,6 @@ const routes = [{
         name: 'FrontCheckOrder',
         component: FrontCheckOrder
       }
-
     ]
   },
 
@@ -91,7 +91,8 @@ const routes = [{
     path: '/admin',
     name: 'Dashboard',
     component: Dashboard,
-    children: [{
+    children: [
+      {
         path: 'products',
         name: 'Products',
         component: Products,
@@ -115,7 +116,6 @@ const routes = [{
           requiresAuth: true
         }
       }
-
     ]
   }
 ];

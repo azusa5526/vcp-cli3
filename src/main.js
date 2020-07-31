@@ -10,7 +10,6 @@ import 'bootstrap';
 import Loading from 'vue-loading-overlay';
 import 'vue-loading-overlay/dist/vue-loading.css';
 import VeeValidate from 'vee-validate';
-import Blowup from 'blowup/lib/blowup';
 
 import './bus';
 import currencyFilter from './filters/currency';
@@ -22,7 +21,6 @@ Vue.use(VueAxios, axios);
 axios.defaults.withCredentials = true;
 
 Vue.use(VeeValidate);
-Vue.use(Blowup);
 
 Vue.component('Loading', Loading);
 Vue.filter('currency', currencyFilter);
