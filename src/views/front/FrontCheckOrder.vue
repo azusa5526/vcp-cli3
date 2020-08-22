@@ -1,7 +1,5 @@
 <template>
   <div class="container my-4">
-    <loading :active.sync="isLoading"></loading>
-
     <div class="trace-order-wrap">
       <div class="input-group mb-4">
         <input
@@ -94,9 +92,8 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      isLoading: false,
       inputOrderId: '',
       order: {
         user: {}
@@ -105,47 +102,47 @@ export default {
   },
 
   methods: {
-    getOrderById () {
+    getOrderById() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.inputOrderId}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.order != null) {
           vm.order = response.data.order;
           vm.inputOrderId = '';
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         } else {
           vm.$bus.$emit('message:push', 'Order ID not found', 'third');
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },
 
-    payOrder () {
+    payOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${vm.order.id}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         if (response.data.success) {
           vm.getOrder();
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         } else {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },
 
-    getOrder () {
+    getOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.order.id}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.order = response.data.order;
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     }

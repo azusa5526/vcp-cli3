@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <FrontSlidesProducts></FrontSlidesProducts>
 
     <div class="row mt-4 justify-content-center">
@@ -78,7 +77,6 @@ export default {
   data() {
     return {
       products: [],
-      isLoading: false,
       status: {
         noProductsInWindow: false
       },
@@ -103,10 +101,10 @@ export default {
     getAllProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         vm.products = response.data.products;
       });
     },
@@ -114,13 +112,13 @@ export default {
     getProduct(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       localStorage.setItem('cateFilteredList', JSON.stringify(vm.categoryFilteredList));
 
       vm.$http.get(api).then((response) => {
         if (response.data.success) {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           vm.$router.push(`../front_single_product/${response.data.product.id}`);
         }
       });

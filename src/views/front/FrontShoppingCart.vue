@@ -1,7 +1,5 @@
 <template>
   <div class="row justify-content-center">
-    <loading :active.sync="isLoading"></loading>
-
     <div class="container my-4" v-if="cartHasItem">
       <div class="cart-wrap">
         <div class="shopping-step mb-4">
@@ -41,7 +39,6 @@
 export default {
   data () {
     return {
-      isLoading: false,
       shoppingCart: [],
       couponCode: '',
       form: {
@@ -62,11 +59,10 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
 
-      vm.isLoading = true;
-
+      this.$store.dispatch('updateLoading', true);
       vm.$http.get(api).then(response => {
         vm.shoppingCart = response.data.data;
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
       });
     }
   },

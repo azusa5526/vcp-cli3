@@ -1,7 +1,5 @@
 <template>
   <div class="checkout-wrap">
-    <loading :active.sync="isLoading"></loading>
-
     <form @submit.prevent="payOrder">
       <div class="orderTable-title">
         <h4>OEDER LIST</h4>
@@ -95,7 +93,6 @@ import $ from 'jquery';
 export default {
   data () {
     return {
-      isLoading: false,
       orderId: '',
       order: {
         user: {}
@@ -107,12 +104,11 @@ export default {
     getOrder () {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.orderId}`;
-      vm.isLoading = true;
-
+      this.$store.dispatch('updateLoading', true);
       vm.$http.get(api).then(response => {
         if (response.data.success) {
           vm.order = response.data.order;
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },
@@ -120,15 +116,14 @@ export default {
     payOrder () {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${vm.orderId}`;
-      vm.isLoading = true;
-
+      this.$store.dispatch('updateLoading', true);
       vm.$http.post(api).then(response => {
         if (response.data.success) {
           vm.getOrder();
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           $('#paymentCompeleted').modal('show');
         } else {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },

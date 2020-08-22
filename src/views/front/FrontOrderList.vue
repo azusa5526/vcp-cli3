@@ -1,6 +1,5 @@
 <template>
   <div class="orderList-wrap">
-    <loading :active.sync="isLoading"></loading>
     <form>
       <div class="form-title">
         RECIPIENT INFO
@@ -94,7 +93,6 @@
 export default {
   data () {
     return {
-      isLoading: false,
       form: {
         user: {
           name: '',
@@ -112,8 +110,8 @@ export default {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
       const order = vm.form;
-      vm.isLoading = true;
 
+      this.$store.dispatch('updateLoading', true);
       vm.$validator.validate().then(valid => {
         if (valid) {
           vm.$http.post(api, { data: order }).then(response => {
@@ -121,10 +119,10 @@ export default {
               vm.$bus.$emit('message:push', 'Order created', 'primary');
               vm.$router.push(`front_checkout/${response.data.orderId}`);
             }
-            vm.isLoading = false;
+            this.$store.dispatch('updateLoading', false);
           });
         } else {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     }

@@ -1,7 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
-
     <FrontSlideshow @gotoSingleProduct="getProduct" class="mb-3"></FrontSlideshow>
 
     <div class="mid-banner mb-3">
@@ -143,8 +141,7 @@ export default {
 
   data() {
     return {
-      products: [],
-      isLoading: false
+      products: []
     };
   },
 
@@ -152,10 +149,10 @@ export default {
     getAllProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then((response) => {
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         vm.products = response.data.products;
       });
     },

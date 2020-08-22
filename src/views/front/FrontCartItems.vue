@@ -1,6 +1,5 @@
 <template>
   <div class="item-wrap">
-    <loading :active.sync="isLoading"></loading>
     <table class="table">
       <thead>
         <tr>
@@ -82,9 +81,8 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
-      isLoading: false,
       shoppingCart: [],
       couponCode: '',
       form: {
@@ -100,7 +98,7 @@ export default {
   },
 
   methods: {
-    updateCart (cartItemId, productId, qty) {
+    updateCart(cartItemId, productId, qty) {
       const vm = this;
       const rmApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${cartItemId}`;
       const addApi = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
@@ -108,46 +106,43 @@ export default {
         product_id: productId,
         qty
       };
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.delete(rmApi).then(response => {
+      vm.$http.delete(rmApi).then((response) => {
         if (response.data.success) {
-          vm.$http.post(addApi, { data: cart }).then(response => {
+          vm.$http.post(addApi, { data: cart }).then((response) => {
             if (response.data.success) {
               vm.getCart();
             } else {
-              vm.$bus.$emit(
-                'message:push',
-                'Fail update(add) cart Qty',
-                'third'
-              );
+              vm.$bus.$emit('message:push', 'Fail update(add) cart Qty', 'third');
+              this.$store.dispatch('updateLoading', false);
             }
           });
         } else {
           vm.$bus.$emit('message:push', 'Fail update(del) cart Qty', 'third');
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },
 
-    removeCartItem (id) {
+    removeCartItem(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.$bus.$emit('message:push', 'Remove item succefully', 'primary');
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           vm.getCart();
         } else {
           vm.$bus.$emit('message:push', 'Fail delete item from cart', 'third');
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         }
       });
     },
 
-    addToCart (id, qty) {
+    addToCart(id, qty) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       const cart = {
@@ -155,7 +150,7 @@ export default {
         qty
       };
 
-      vm.$http.post(api, { data: cart }).then(response => {
+      vm.$http.post(api, { data: cart }).then((response) => {
         if (response.data.success) {
           vm.getCart();
         } else {
@@ -164,45 +159,45 @@ export default {
       });
     },
 
-    addCouponCode () {
+    addCouponCode() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/coupon`;
       const coupon = {
         code: vm.couponCode
       };
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.post(api, { data: coupon }).then(response => {
+      vm.$http.post(api, { data: coupon }).then((response) => {
         if (response.data.success) {
           vm.getCart();
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Apply coupon succefully', 'primary');
         } else {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Coupon code not found', 'third');
         }
       });
     },
 
-    getCart () {
+    getCart() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.shoppingCart = response.data.data;
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
       });
     },
 
-    quantitySub (item) {
+    quantitySub(item) {
       const vm = this;
       if (item.qty > 1) {
         vm.updateCart(item.id, item.product_id, item.qty - 1);
       }
     },
 
-    quantityPlus (item) {
+    quantityPlus(item) {
       const vm = this;
       if (item.qty < 5) {
         vm.updateCart(item.id, item.product_id, item.qty + 1);
@@ -211,7 +206,7 @@ export default {
   },
 
   computed: {
-    cartHasItem () {
+    cartHasItem() {
       const vm = this;
       if (vm.shoppingCart.carts === undefined) {
         return 0;
@@ -225,7 +220,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getCart();
   }
 };

@@ -1,7 +1,5 @@
 <template>
   <div class="fsp-container-fluid">
-    <loading :active.sync="isLoading"></loading>
-
     <div class="hero-decorate mt-3" style="border-top: #F68657 5px solid;" v-if="isHero"></div>
     <div :class="{'mt-3' : !isHero}" class="product-header">
       <div class="row justify-content-center">
@@ -118,7 +116,6 @@
 export default {
   data () {
     return {
-      isLoading: false,
       productId: '',
       recommandProducts: [],
       localCateProducts: [],
@@ -151,14 +148,14 @@ export default {
     getSingleProduct () {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${vm.productId}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
       vm.randomProduct(vm.localCateProducts, 4);
 
       vm.$http.get(api).then(response => {
         if (response.data.success) {
           vm.product = response.data.product;
           vm.$set(vm.product, 'num', 1);
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
           vm.hero();
         }
       });
@@ -180,11 +177,11 @@ export default {
     getCart () {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then(response => {
         vm.shoppingCart = response.data.data;
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
       });
     },
 
@@ -234,13 +231,14 @@ export default {
     removeCartItem (id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.delete(api).then(response => {
         if (response.data.success) {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
         } else {
-          vm.isLoading = false;
+          this.$store.dispatch('updateLoading', false);
+          vm.$bus.$emit('message:push', 'Fail to remove to cart', 'third');
         }
       });
     },
