@@ -75,7 +75,7 @@ export default {
     FrontSlidesProducts
   },
 
-  data () {
+  data() {
     return {
       products: [],
       isLoading: false,
@@ -100,45 +100,40 @@ export default {
   },
 
   methods: {
-    getAllProducts () {
+    getAllProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
       vm.isLoading = true;
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false;
         vm.products = response.data.products;
       });
     },
 
-    getProduct (id) {
+    getProduct(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       vm.isLoading = true;
 
-      localStorage.setItem(
-        'cateFilteredList',
-        JSON.stringify(vm.categoryFilteredList)
-      );
+      localStorage.setItem('cateFilteredList', JSON.stringify(vm.categoryFilteredList));
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.isLoading = false;
-          vm.$router.push(
-            `../front_single_product/${response.data.product.id}`
-          );
+          vm.$router.push(`../front_single_product/${response.data.product.id}`);
         }
       });
     },
 
-    activatedProductFilterList () {
+    activatedProductFilterList() {
       const vm = this;
       return vm.products.filter(function (item) {
         return item.is_enabled;
       });
     },
 
-    categoryFilterList () {
+    categoryFilterList() {
       const vm = this;
       const tempProducts = vm.activatedProductFilterList();
       tempProducts.reverse();
@@ -153,7 +148,7 @@ export default {
       }
     },
 
-    productsFilterList () {
+    productsFilterList() {
       const vm = this;
       let tempProducts = vm.categoryFilterList();
       vm.categoryFilteredList = tempProducts;
@@ -170,18 +165,16 @@ export default {
       }
     },
 
-    updateProductsFilter (prodsFilter) {
+    updateProductsFilter(prodsFilter) {
       const vm = this;
       vm.productsFilter = prodsFilter;
     },
 
-    pgnationCounter () {
+    pgnationCounter() {
       const vm = this;
       const productsLength = vm.filteredProducts.length;
 
-      vm.pgnation.total_pages = Number(
-        Math.floor(productsLength / vm.pgnation.page_size) + 1
-      );
+      vm.pgnation.total_pages = Number(Math.floor(productsLength / vm.pgnation.page_size) + 1);
 
       if (vm.pgnation.current_page < vm.pgnation.total_pages) {
         vm.pgnation.has_next = true;
@@ -196,12 +189,10 @@ export default {
       }
     },
 
-    pageSpliter () {
+    pageSpliter() {
       const vm = this;
       const pageMinIndex =
-        vm.pgnation.current_page * vm.pgnation.page_size -
-        vm.pgnation.page_size +
-        1;
+        vm.pgnation.current_page * vm.pgnation.page_size - vm.pgnation.page_size + 1;
       const pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
 
       vm.productsInWindow = [];
@@ -213,7 +204,7 @@ export default {
       });
     },
 
-    changeCurrentPage (targetPage) {
+    changeCurrentPage(targetPage) {
       const vm = this;
       vm.pgnation.current_page = Number(targetPage);
       vm.pgnationCounter();
@@ -222,16 +213,14 @@ export default {
   },
 
   computed: {
-    productsInWindowList () {
+    productsInWindowList() {
       const vm = this;
       const productsInWindow = [];
 
       vm.filteredProducts = vm.productsFilterList();
 
       const pageMinIndex =
-        vm.pgnation.current_page * vm.pgnation.page_size -
-        vm.pgnation.page_size +
-        1;
+        vm.pgnation.current_page * vm.pgnation.page_size - vm.pgnation.page_size + 1;
       const pageMaxIndex = vm.pgnation.current_page * vm.pgnation.page_size;
 
       vm.filteredProducts.forEach(function (item, index) {
@@ -248,13 +237,13 @@ export default {
 
   watch: {
     categoryFilter: {
-      handler () {
+      handler() {
         this.pgnation.current_page = 1;
       }
     },
 
     productsInWindow: {
-      handler () {
+      handler() {
         if (this.productsInWindow.length === 0) {
           this.status.noProductsInWindow = true;
         } else {
@@ -264,7 +253,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getAllProducts();
     this.pgnationCounter();
     this.pageSpliter();

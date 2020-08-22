@@ -141,7 +141,7 @@ export default {
     FrontSlideshow
   },
 
-  data () {
+  data() {
     return {
       products: [],
       isLoading: false
@@ -149,41 +149,39 @@ export default {
   },
 
   methods: {
-    getAllProducts () {
+    getAllProducts() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
       vm.isLoading = true;
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.isLoading = false;
         vm.products = response.data.products;
       });
     },
 
-    getProduct (id) {
+    getProduct(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       const heroProducts = vm.categoryFilterList();
 
       localStorage.setItem('cateFilteredList', JSON.stringify(heroProducts));
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
-          vm.$router.push(
-            `../front_single_product/${response.data.product.id}`
-          );
+          vm.$router.push(`../front_single_product/${response.data.product.id}`);
         }
       });
     },
 
-    activatedProductFilterList () {
+    activatedProductFilterList() {
       const vm = this;
       return vm.products.filter(function (item) {
         return item.is_enabled;
       });
     },
 
-    categoryFilterList () {
+    categoryFilterList() {
       const vm = this;
       const tempProducts = vm.activatedProductFilterList();
       tempProducts.reverse();
@@ -193,7 +191,7 @@ export default {
       });
     },
 
-    copyCouponCode () {
+    copyCouponCode() {
       const vm = this;
       const couponBtn = document.querySelector('#couponBtn');
       couponBtn.addEventListener('click', () => {
@@ -210,7 +208,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getAllProducts();
   }
 };
