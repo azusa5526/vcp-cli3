@@ -1,6 +1,6 @@
 <template>
   <div>
-    <FrontSlideshow @gotoSingleProduct="getProduct" class="mb-3"></FrontSlideshow>
+    <FrontSlideshow @gotoSingleProduct="getSingleProduct" class="mb-3"></FrontSlideshow>
 
     <div class="mid-banner mb-3">
       <div class="mid-banner-img">
@@ -15,7 +15,7 @@
       <div class="row">
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            @click="getProduct('-MA13AwgWT1qNex6b85M')"
+            @click="getSingleProduct('-MA13AwgWT1qNex6b85M')"
             class="link-block"
             href="#/front_single_product/-MA13AwgWT1qNex6b85M"
           >
@@ -34,7 +34,7 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            @click="getProduct('-M9y6Rpb6D6ntBcwB5XZ')"
+            @click="getSingleProduct('-M9y6Rpb6D6ntBcwB5XZ')"
             class="link-block"
             href="#/front_single_product/-M9y6Rpb6D6ntBcwB5XZ"
           >
@@ -53,7 +53,7 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            @click="getProduct('-MBE7OLMRCOp_Z1Mkj48')"
+            @click="getSingleProduct('-MBE7OLMRCOp_Z1Mkj48')"
             class="link-block"
             href="#/front_single_product/-MBE7OLMRCOp_Z1Mkj48"
           >
@@ -72,7 +72,7 @@
 
         <div class="col-lg-3 col-md-6 hero-hover">
           <a
-            @click="getProduct('-MBE32QzaHahHEuGg3xQ')"
+            @click="getSingleProduct('-MBE32QzaHahHEuGg3xQ')"
             class="link-block"
             href="#/front_single_product/-MBE32QzaHahHEuGg3xQ"
           >
@@ -145,35 +145,9 @@ export default {
   },
 
   methods: {
-    getProduct(id) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
-      const heroProducts = vm.categoryFilterList();
-
-      localStorage.setItem('cateFilteredList', JSON.stringify(heroProducts));
-
-      vm.$http.get(api).then((response) => {
-        if (response.data.success) {
-          vm.$router.push(`../front_single_product/${response.data.product.id}`);
-        }
-      });
-    },
-
-    activatedProductFilterList() {
-      const vm = this;
-      return vm.products.filter(function (item) {
-        return item.is_enabled;
-      });
-    },
-
-    categoryFilterList() {
-      const vm = this;
-      const tempProducts = vm.activatedProductFilterList();
-      tempProducts.reverse();
-
-      return tempProducts.filter(function (item) {
-        return item.category.indexOf('hero') !== -1;
-      });
+    getSingleProduct(id) {
+      const categoryFilter = 'hero';
+      this.$store.dispatch('getSingleProduct', { id, categoryFilter });
     },
 
     copyCouponCode() {
@@ -194,7 +168,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allProducts'])
+    ...mapGetters(['allProducts', 'activedProducts', 'categoryFilteredProducts'])
   },
 
   created() {
