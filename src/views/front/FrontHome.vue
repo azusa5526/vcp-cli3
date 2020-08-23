@@ -168,7 +168,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(['allProducts', 'activedProducts', 'categoryFilteredProducts'])
+    ...mapGetters(['allProducts'])
   },
 
   created() {

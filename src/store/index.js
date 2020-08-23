@@ -27,19 +27,10 @@ export default new Vuex.Store({
       });
     },
 
-    getActivedProducts(context) {
-      context.commit('ACTIVEDPRODUCTS');
-    },
-
-    getCategoryFilteredProducts(context, filter) {
-      context.commit('ACTIVEDPRODUCTS');
-      context.commit('CATEGORYFILTEREDPRODUCTS', filter);
-    },
-
-    getSingleProduct(context, { id, filter }) {
+    getSingleProduct(context, { id, categoryFilter }) {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       context.commit('ACTIVEDPRODUCTS');
-      context.commit('CATEGORYFILTEREDPRODUCTS', filter);
+      context.commit('CATEGORYFILTEREDPRODUCTS', categoryFilter);
       axios.get(api).then((response) => {
         if (response.data.success) {
           router.push(`../front_single_product/${response.data.product.id}`);
@@ -79,14 +70,6 @@ export default new Vuex.Store({
     allProducts(state) {
       return state.allProducts;
     },
-
-    activedProducts(state) {
-      return state.activedProducts;
-    },
-
-    categoryFilteredProducts(state) {
-      return state.categoryFilteredProducts.reverse();
-    }
   },
   modules: {}
 });
