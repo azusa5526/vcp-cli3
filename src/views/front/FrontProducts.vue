@@ -66,6 +66,7 @@
 import FrontSidebar from '@/components/front/FrontSidebar.vue';
 import Pgnation from '@/components/front/Pgnation.vue';
 import FrontSlidesProducts from './FrontSlidesProducts.vue';
+import { mapGetters } from 'vuex';
 
 export default {
   components: {
@@ -76,7 +77,6 @@ export default {
 
   data() {
     return {
-      products: [],
       status: {
         noProductsInWindow: false
       },
@@ -98,17 +98,6 @@ export default {
   },
 
   methods: {
-    getAllProducts() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/products/all`;
-      this.$store.dispatch('updateLoading', true);
-
-      vm.$http.get(api).then((response) => {
-        this.$store.dispatch('updateLoading', false);
-        vm.products = response.data.products;
-      });
-    },
-
     getProduct(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
@@ -126,7 +115,7 @@ export default {
 
     activatedProductFilterList() {
       const vm = this;
-      return vm.products.filter(function (item) {
+      return vm.allProducts.filter(function (item) {
         return item.is_enabled;
       });
     },
@@ -230,7 +219,8 @@ export default {
       vm.pgnationCounter();
       vm.pageSpliter();
       return productsInWindow;
-    }
+    },
+    ...mapGetters(['allProducts'])
   },
 
   watch: {
@@ -252,7 +242,7 @@ export default {
   },
 
   created() {
-    this.getAllProducts();
+    this.$store.dispatch('getAllProducts');
     this.pgnationCounter();
     this.pageSpliter();
   }

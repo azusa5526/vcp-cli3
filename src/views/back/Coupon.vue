@@ -1,7 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
-
     <div class="dashboard-table-wrap mb-3">
       <div class="text-right mb-3">
         <button @click="openModal(true)" class="btn btn-primary">ADD COUPON</button>
@@ -188,7 +186,6 @@ export default {
       coupons: [],
       tempCoupon: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false,
         itemUpdating: false
@@ -201,10 +198,10 @@ export default {
     getCoupons (page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupons?page=${page}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then(response => {
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       });

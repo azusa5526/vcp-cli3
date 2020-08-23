@@ -1,6 +1,5 @@
 <template>
   <div>
-    <loading :active.sync="isLoading"></loading>
     <div class="dashboard-table-wrap my-3">
       <table class="table">
         <thead>
@@ -54,7 +53,6 @@ export default {
       orders: [],
       tempProduct: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false
       },
@@ -66,10 +64,10 @@ export default {
     getOrders (page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/orders?page=${page}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then(response => {
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
       });

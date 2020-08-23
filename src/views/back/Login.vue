@@ -46,32 +46,27 @@
 <script>
 export default {
   name: 'Login',
-  data () {
+  data() {
     return {
       user: {
         username: '',
         password: ''
-      },
-      isLoading: false
+      }
     };
   },
 
   methods: {
-    signin () {
+    signin() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.post(api, vm.user).then(response => {
-        vm.isLoading = false;
+      vm.$http.post(api, vm.user).then((response) => {
+        this.$store.dispatch('updateLoading', false);
         if (response.data.success) {
           vm.$router.push('/home');
         } else if (response.data.error.code === 'auth/wrong-password') {
-          vm.$bus.$emit(
-            'message:push',
-            'Account or password is invalid',
-            'third'
-          );
+          vm.$bus.$emit('message:push', 'Account or password is invalid', 'third');
         }
       });
     }

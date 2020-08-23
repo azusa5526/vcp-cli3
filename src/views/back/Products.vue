@@ -1,7 +1,5 @@
 <template>
   <div class="productList-wrap">
-    <loading :active.sync="isLoading"></loading>
-
     <div class="dashboard-table-wrap my-3">
       <div class="text-right mb-3">
         <button @click="openModal(true)" class="btn btn-primary">ADD PRODUCT</button>
@@ -244,7 +242,6 @@ export default {
       products: [],
       tempProduct: {},
       isNew: false,
-      isLoading: false,
       status: {
         fileUploading: false,
         itemUpdating: false
@@ -257,10 +254,10 @@ export default {
     getProducts (page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${page}`;
-      vm.isLoading = true;
+      this.$store.dispatch('updateLoading', true);
 
       vm.$http.get(api).then(response => {
-        vm.isLoading = false;
+        this.$store.dispatch('updateLoading', false);
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       });
