@@ -10,7 +10,9 @@ export default new Vuex.Store({
     isLoading: false,
     allProducts: [],
     activedProducts: [],
-    categoryFilteredProducts: []
+    categoryFilteredProducts: [],
+    categoryFilter: '',
+    productsFilter: ''
   },
   actions: {
     updateLoading(context, status) {
@@ -27,6 +29,11 @@ export default new Vuex.Store({
       });
     },
 
+    getCategoryFilteredProducts(context, categoryFilter) {
+      context.commit('ACTIVEDPRODUCTS');
+      context.commit('CATEGORYFILTEREDPRODUCTS', categoryFilter);
+    },
+
     getSingleProduct(context, { id, categoryFilter }) {
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
       context.commit('ACTIVEDPRODUCTS');
@@ -36,6 +43,14 @@ export default new Vuex.Store({
           router.push(`../front_single_product/${response.data.product.id}`);
         }
       });
+    },
+
+    setCategoryFilter(context, filter) {
+      context.commit('CATEGORYFILTER', filter);
+    },
+
+    setProductsFilter(context, filter) {
+      context.commit('CATEGORYFILTER', filter);
     }
   },
 
@@ -54,11 +69,20 @@ export default new Vuex.Store({
       });
     },
 
-    CATEGORYFILTEREDPRODUCTS(state, filter) {
-      state.categoryFilteredProducts = state.activedProducts.filter(function (item) {
-        return item.category.indexOf(filter) !== -1;
-      });
+    CATEGORYFILTEREDPRODUCTS(state, categoryFilter) {
+      if (categoryFilter === 'all') {
+        state.categoryFilteredProducts = state.activedProducts;
+      } else {
+        state.categoryFilteredProducts = state.activedProducts.filter(function (item) {
+          return item.category.indexOf(categoryFilter) !== -1;
+        });
+      }
+      console.log('cateLocal', categoryFilter);
       localStorage.setItem('cateFilteredList', JSON.stringify(state.categoryFilteredProducts));
+    },
+
+    CATEGORYFILTER(state, filter) {
+      state.categoryFilter = filter;
     }
   },
 
@@ -70,6 +94,14 @@ export default new Vuex.Store({
     allProducts(state) {
       return state.allProducts;
     },
+
+    categoryFilteredProducts(state) {
+      return state.categoryFilteredProducts.reverse();
+    },
+
+    categoryFilter(state) {
+      return state.categoryFilter;
+    }
   },
   modules: {}
 });

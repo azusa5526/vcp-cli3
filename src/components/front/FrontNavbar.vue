@@ -23,7 +23,7 @@
           <router-link class="nav-link" to="/Front_check_order">CHECK ORDER</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/frontProducts/all">PRODUCTS</router-link>
+          <router-link class="nav-link" @click="setCategoryFilter" to="/frontProducts/all">PRODUCTS</router-link>
         </li>
       </ul>
 
@@ -96,6 +96,11 @@ export default {
           vm.$router.push('/home');
         }
       });
+    },
+
+    setCategoryFilter() {
+      const categoryFilter = 'all';
+      this.$store.dispatch('setCategoryFilter', categoryFilter);
     }
   },
 

@@ -4,11 +4,7 @@
 
     <div class="row mt-4 justify-content-center">
       <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12 col-12 mb-3 side-wrap">
-        <FrontSidebar
-          :cateFilter="categoryFilter"
-          :prodFilter="productsFilter"
-          @filterUpdate="updateProductsFilter"
-        ></FrontSidebar>
+        <FrontSidebar></FrontSidebar>
       </div>
 
       <div class="col-xl-10 col-lg-9 col-md-9 col-sm-12 col-12 product-wrap">
@@ -20,8 +16,8 @@
           >
             <a
               :href="'#/front_single_product/' + item.id"
-              @click="getProduct(item.id)"
-              @click.middle="getProduct(item.id)"
+              @click="getSingleProduct(item.id)"
+              @click.middle="getSingleProduct(item.id)"
               class="link-block"
             >
               <div class="card border-0 shadow-sm">
@@ -88,8 +84,6 @@ export default {
         page_size: 12
       },
 
-      categoryFilter: '',
-      productsFilter: [],
       filteredProducts: [],
       productsInWindow: [],
       categoryFilteredList: [],
@@ -98,46 +92,18 @@ export default {
   },
 
   methods: {
-    getProduct(id) {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
-      this.$store.dispatch('updateLoading', true);
-
-      localStorage.setItem('cateFilteredList', JSON.stringify(vm.categoryFilteredList));
-
-      vm.$http.get(api).then((response) => {
-        if (response.data.success) {
-          this.$store.dispatch('updateLoading', false);
-          vm.$router.push(`../front_single_product/${response.data.product.id}`);
-        }
-      });
-    },
-
-    activatedProductFilterList() {
-      const vm = this;
-      return vm.allProducts.filter(function (item) {
-        return item.is_enabled;
-      });
-    },
-
-    categoryFilterList() {
-      const vm = this;
-      const tempProducts = vm.activatedProductFilterList();
-      tempProducts.reverse();
-
-      vm.categoryFilter = vm.$route.params.categoryFilter;
-      if (vm.categoryFilter === 'all') {
-        return tempProducts;
-      } else {
-        return tempProducts.filter(function (item) {
-          return item.category.indexOf(vm.categoryFilter) !== -1;
-        });
-      }
+    getSingleProduct(id) {
+      const categoryFilter = this.$route.params.categoryFilter;
+      this.$store.dispatch('getSingleProduct', { id, categoryFilter });
     },
 
     productsFilterList() {
       const vm = this;
-      let tempProducts = vm.categoryFilterList();
+      vm.categoryFilter = vm.$route.params.categoryFilter;
+      this.$store.dispatch('setCategoryFilter', vm.$route.params.categoryFilter);
+      this.$store.dispatch('getCategoryFilteredProducts', vm.$route.params.categoryFilter);
+
+      let tempProducts = this.categoryFilteredProducts;
       vm.categoryFilteredList = tempProducts;
 
       if (vm.productsFilter.length === 0) {
@@ -220,7 +186,7 @@ export default {
       vm.pageSpliter();
       return productsInWindow;
     },
-    ...mapGetters(['allProducts'])
+    ...mapGetters(['allProducts', 'categoryFilteredProducts', 'categoryFilter'])
   },
 
   watch: {
