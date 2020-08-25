@@ -181,7 +181,7 @@ export default {
     Pagination
   },
 
-  data () {
+  data() {
     return {
       coupons: [],
       tempCoupon: {},
@@ -195,19 +195,19 @@ export default {
   },
 
   methods: {
-    getCoupons (page = 1) {
+    getCoupons(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupons?page=${page}`;
       this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         vm.coupons = response.data.coupons;
         vm.pagination = response.data.pagination;
       });
     },
 
-    openModal (isNew, item) {
+    openModal(isNew, item) {
       if (isNew) {
         this.tempCoupon = {};
         this.isNew = true;
@@ -218,12 +218,12 @@ export default {
       $('#couponModal').modal('show');
     },
 
-    openDeleteCouponModal (item) {
+    openDeleteCouponModal(item) {
       this.tempCoupon = Object.assign({}, item);
       $('#delCouponModal').modal('show');
     },
 
-    updateCoupon () {
+    updateCoupon() {
       const vm = this;
       let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon`;
       let httpMethod = 'post';
@@ -235,7 +235,7 @@ export default {
         httpMethod = 'put';
       }
 
-      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempCoupon }).then((response) => {
         if (response.data.success) {
           vm.status.itemUpdating = true;
           $('#couponModal').modal('hide');
@@ -249,10 +249,10 @@ export default {
       });
     },
 
-    deleteCoupon () {
+    deleteCoupon() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/coupon/${vm.tempCoupon.id}`;
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           $('#delCouponModal').modal('hide');
           vm.getCoupons(vm.pagination.current_page);
@@ -264,7 +264,7 @@ export default {
       });
     },
 
-    uploadFile () {
+    uploadFile() {
       const vm = this;
       const uploadedFile = this.$refs.files.files[0];
       const formData = new FormData();
@@ -279,7 +279,7 @@ export default {
             'Content-type': 'multipart/form-data'
           }
         })
-        .then(response => {
+        .then((response) => {
           vm.status.fileUploading = false;
           if (response.data.success) {
             vm.$set(vm.tempCoupon, 'imageUrl', response.data.imageUrl);
@@ -290,7 +290,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getCoupons();
   }
 };

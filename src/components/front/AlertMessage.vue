@@ -23,13 +23,13 @@
 <script>
 export default {
   name: 'Navbar',
-  data () {
+  data() {
     return {
       messages: []
     };
   },
   methods: {
-    updateMessage (message, status) {
+    updateMessage(message, status) {
       const timestamp = Math.floor(new Date() / 1000);
       this.messages.push({
         message,
@@ -38,10 +38,10 @@ export default {
       });
       this.removeMessageWithTiming(timestamp);
     },
-    removeMessage (num) {
+    removeMessage(num) {
       this.messages.splice(num, 1);
     },
-    removeMessageWithTiming (timestamp) {
+    removeMessageWithTiming(timestamp) {
       const vm = this;
       setTimeout(() => {
         vm.messages.forEach((item, i) => {
@@ -52,7 +52,7 @@ export default {
       }, 3500);
     }
   },
-  created () {
+  created() {
     const vm = this;
     vm.$bus.$on('message:push', (message, status) => {
       vm.updateMessage(message, status);

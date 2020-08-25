@@ -47,12 +47,12 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {};
   },
 
   methods: {
-    gotoSingleProduct (id) {
+    gotoSingleProduct(id) {
       this.$emit('gotoSingleProduct', id);
     }
   }

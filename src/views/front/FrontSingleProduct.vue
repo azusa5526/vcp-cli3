@@ -6,7 +6,7 @@
         <div class="product-wrap col-12 col-md-6">
           <div class="product-img">
             <div class="abs-wrap">
-              <img :src="product.imageUrl"/>
+              <img :src="product.imageUrl" />
             </div>
           </div>
         </div>
@@ -114,7 +114,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       productId: '',
       recommandProducts: [],
@@ -129,14 +129,14 @@ export default {
   },
 
   watch: {
-    $route (to, from) {
+    $route(to, from) {
       this.productId = this.$route.params.productID;
       this.getSingleProduct();
     }
   },
 
   methods: {
-    hero () {
+    hero() {
       const vm = this;
       if (vm.product.category.indexOf('hero') !== -1) {
         vm.isHero = true;
@@ -145,13 +145,13 @@ export default {
       }
     },
 
-    getSingleProduct () {
+    getSingleProduct() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${vm.productId}`;
       this.$store.dispatch('updateLoading', true);
       vm.randomProduct(vm.localCateProducts, 4);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.product = response.data.product;
           vm.$set(vm.product, 'num', 1);
@@ -161,31 +161,29 @@ export default {
       });
     },
 
-    getRecommandProduct (id) {
+    getRecommandProduct(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${id}`;
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
-          vm.$router.push(
-            `../front_single_product/${response.data.product.id}`
-          );
+          vm.$router.push(`../front_single_product/${response.data.product.id}`);
         }
       });
     },
 
-    getCart () {
+    getCart() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.shoppingCart = response.data.data;
         this.$store.dispatch('updateLoading', false);
       });
     },
 
-    addToCart (id, direct, qty = 1) {
+    addToCart(id, direct, qty = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
       const cart = {
@@ -207,14 +205,10 @@ export default {
         }
       });
 
-      vm.$http.post(api, { data: cart }).then(response => {
+      vm.$http.post(api, { data: cart }).then((response) => {
         if (response.data.success) {
           vm.getCart();
-          vm.$bus.$emit(
-            'message:push',
-            'Successfully add to cart',
-            'secondary'
-          );
+          vm.$bus.$emit('message:push', 'Successfully add to cart', 'secondary');
           vm.clickedButton = '';
           vm.product.num = 1;
 
@@ -228,12 +222,12 @@ export default {
       });
     },
 
-    removeCartItem (id) {
+    removeCartItem(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
       this.$store.dispatch('updateLoading', true);
 
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           this.$store.dispatch('updateLoading', false);
         } else {
@@ -243,21 +237,21 @@ export default {
       });
     },
 
-    quantitySub (product) {
+    quantitySub(product) {
       const vm = this;
       if (vm.product.num > 1) {
         vm.product.num--;
       }
     },
 
-    quantityPlus (product) {
+    quantityPlus(product) {
       const vm = this;
       if (vm.product.num < 5) {
         vm.product.num++;
       }
     },
 
-    randomProduct (arr, num) {
+    randomProduct(arr, num) {
       const newArr = [];
       if (arr.length <= num) {
         num = arr.length;
@@ -265,7 +259,7 @@ export default {
 
       rand(num);
 
-      function rand (selectQty) {
+      function rand(selectQty) {
         if (selectQty === 0) {
           return;
         }
@@ -288,17 +282,13 @@ export default {
 
       this.recommandProducts = newArr;
     }
-
   },
 
-  created () {
+  created() {
     this.productId = this.$route.params.productID;
-    this.localCateProducts = JSON.parse(
-      localStorage.getItem('cateFilteredList')
-    );
+    this.localCateProducts = JSON.parse(localStorage.getItem('cateFilteredList'));
     this.getSingleProduct();
     this.getCart();
   }
-
 };
 </script>

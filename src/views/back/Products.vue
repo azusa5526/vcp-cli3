@@ -237,7 +237,7 @@ export default {
     Pagination
   },
 
-  data () {
+  data() {
     return {
       products: [],
       tempProduct: {},
@@ -251,19 +251,19 @@ export default {
   },
 
   methods: {
-    getProducts (page = 1) {
+    getProducts(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/products?page=${page}`;
       this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         vm.products = response.data.products;
         vm.pagination = response.data.pagination;
       });
     },
 
-    openModal (isNew, item) {
+    openModal(isNew, item) {
       if (isNew) {
         this.tempProduct = {};
         this.isNew = true;
@@ -274,12 +274,12 @@ export default {
       $('#productModal').modal('show');
     },
 
-    openDeleteProductModal (item) {
+    openDeleteProductModal(item) {
       this.tempProduct = Object.assign({}, item);
       $('#delProductModal').modal('show');
     },
 
-    updateProduct () {
+    updateProduct() {
       const vm = this;
       let api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product`;
       let httpMethod = 'post';
@@ -291,7 +291,7 @@ export default {
         httpMethod = 'put';
       }
 
-      vm.$http[httpMethod](api, { data: vm.tempProduct }).then(response => {
+      vm.$http[httpMethod](api, { data: vm.tempProduct }).then((response) => {
         if (response.data.success) {
           vm.status.itemUpdating = false;
           $('#productModal').modal('hide');
@@ -305,10 +305,10 @@ export default {
       });
     },
 
-    deleteProduct () {
+    deleteProduct() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/product/${vm.tempProduct.id}`;
-      vm.$http.delete(api).then(response => {
+      vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           $('#delProductModal').modal('hide');
           vm.getProducts(vm.pagination.current_page);
@@ -320,7 +320,7 @@ export default {
       });
     },
 
-    uploadFile () {
+    uploadFile() {
       const vm = this;
       const uploadedFile = this.$refs.files.files[0];
       const formData = new FormData();
@@ -334,7 +334,7 @@ export default {
             'Content-type': 'multipart/form-data'
           }
         })
-        .then(response => {
+        .then((response) => {
           vm.status.fileUploading = false;
           if (response.data.success) {
             vm.$set(vm.tempProduct, 'imageUrl', response.data.imageUrl);
@@ -345,7 +345,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getProducts();
   }
 };

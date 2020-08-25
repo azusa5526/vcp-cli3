@@ -19,7 +19,7 @@ export default {
     Navbar
   },
 
-  data () {
+  data() {
     return {};
   }
 };

@@ -37,7 +37,7 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       shoppingCart: [],
       couponCode: '',
@@ -55,12 +55,12 @@ export default {
   },
 
   methods: {
-    getCart () {
+    getCart() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
 
       this.$store.dispatch('updateLoading', true);
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         vm.shoppingCart = response.data.data;
         this.$store.dispatch('updateLoading', false);
       });
@@ -68,11 +68,11 @@ export default {
   },
 
   computed: {
-    activedPage () {
+    activedPage() {
       return this.$route.name;
     },
 
-    cartHasItem () {
+    cartHasItem() {
       const vm = this;
       if (vm.shoppingCart.carts === undefined) {
         return 0;
@@ -86,7 +86,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getCart();
   }
 };

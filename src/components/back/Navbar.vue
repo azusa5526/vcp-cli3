@@ -56,27 +56,27 @@
 
 <script>
 export default {
-  data () {
+  data() {
     return {
       is_login: false
     };
   },
 
   methods: {
-    checkLoginStatus () {
+    checkLoginStatus() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/user/check`;
 
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         vm.is_login = response.data.success;
       });
     },
 
-    signOut () {
+    signOut() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/logout`;
 
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         if (response.data.success) {
           vm.is_login = false;
           vm.$router.push('/home');
@@ -85,7 +85,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.checkLoginStatus();
   }
 };

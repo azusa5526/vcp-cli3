@@ -91,7 +91,7 @@
 import $ from 'jquery';
 
 export default {
-  data () {
+  data() {
     return {
       orderId: '',
       order: {
@@ -101,11 +101,11 @@ export default {
   },
 
   methods: {
-    getOrder () {
+    getOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.orderId}`;
       this.$store.dispatch('updateLoading', true);
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.order = response.data.order;
           this.$store.dispatch('updateLoading', false);
@@ -113,11 +113,11 @@ export default {
       });
     },
 
-    payOrder () {
+    payOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${vm.orderId}`;
       this.$store.dispatch('updateLoading', true);
-      vm.$http.post(api).then(response => {
+      vm.$http.post(api).then((response) => {
         if (response.data.success) {
           vm.getOrder();
           this.$store.dispatch('updateLoading', false);
@@ -128,14 +128,13 @@ export default {
       });
     },
 
-    goToProducts () {
+    goToProducts() {
       $('#paymentCompeleted').modal('hide');
       this.$router.push('/frontProducts/all');
     }
-
   },
 
-  created () {
+  created() {
     this.orderId = this.$route.params.orderId;
     this.getOrder();
   }

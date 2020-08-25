@@ -48,7 +48,7 @@ export default {
     Pagination
   },
 
-  data () {
+  data() {
     return {
       orders: [],
       tempProduct: {},
@@ -61,12 +61,12 @@ export default {
   },
 
   methods: {
-    getOrders (page = 1) {
+    getOrders(page = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/admin/orders?page=${page}`;
       this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then(response => {
+      vm.$http.get(api).then((response) => {
         this.$store.dispatch('updateLoading', false);
         vm.orders = response.data.orders;
         vm.pagination = response.data.pagination;
@@ -74,7 +74,7 @@ export default {
     }
   },
 
-  created () {
+  created() {
     this.getOrders();
   }
 };

@@ -89,9 +89,8 @@
 </template>
 
 <script>
-
 export default {
-  data () {
+  data() {
     return {
       form: {
         user: {
@@ -106,15 +105,15 @@ export default {
   },
 
   methods: {
-    createOrder () {
+    createOrder() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order`;
       const order = vm.form;
 
       this.$store.dispatch('updateLoading', true);
-      vm.$validator.validate().then(valid => {
+      vm.$validator.validate().then((valid) => {
         if (valid) {
-          vm.$http.post(api, { data: order }).then(response => {
+          vm.$http.post(api, { data: order }).then((response) => {
             if (response.data.success) {
               vm.$bus.$emit('message:push', 'Order created', 'primary');
               vm.$router.push(`front_checkout/${response.data.orderId}`);

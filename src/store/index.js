@@ -70,8 +70,6 @@ export default new Vuex.Store({
     },
 
     CATEGORYFILTEREDPRODUCTS(state, filter) {
-      console.log('CATEGORYFILTEREDPRODUCTS: state, filter', state, filter);
-
       if (filter === 'all') {
         state.categoryFilteredProducts = state.activedProducts;
       } else {

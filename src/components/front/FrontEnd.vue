@@ -22,7 +22,7 @@ export default {
     FrontFooter
   },
 
-  data () {
+  data() {
     return {};
   }
 };
