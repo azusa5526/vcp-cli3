@@ -39,11 +39,11 @@
         >
           <div class="card-body">
             <div>
-              <input id="intel" type="checkbox" v-model="prodsFilter" value="intel" />
+              <input id="intel" type="checkbox" v-model="productsFilter" value="intel" />
               <label for="intel">Intel</label>
             </div>
             <div>
-              <input id="amd" type="checkbox" v-model="prodsFilter" value="amd" />
+              <input id="amd" type="checkbox" v-model="productsFilter" value="amd" />
               <label for="amd">AMD</label>
             </div>
           </div>
@@ -70,11 +70,11 @@
         >
           <div class="card-body">
             <div>
-              <input id="socket-1151" type="checkbox" v-model="prodsFilter" value="socket-1151" />
+              <input id="socket-1151" type="checkbox" v-model="productsFilter" value="socket-1151" />
               <label for="socket-1151">Socket-1151</label>
             </div>
             <div>
-              <input id="socket-AM4" type="checkbox" v-model="prodsFilter" value="socket-AM4" />
+              <input id="socket-AM4" type="checkbox" v-model="productsFilter" value="socket-AM4" />
               <label for="socket-AM4">Socket-AM4</label>
             </div>
           </div>
@@ -97,15 +97,15 @@
         <div class="collapse" data-parent="#accordion" id="collapseMohterboardBrand">
           <div class="card-body">
             <div>
-              <input id="asus" type="checkbox" v-model="prodsFilter" value="asus" />
+              <input id="asus" type="checkbox" v-model="productsFilter" value="asus" />
               <label for="asus">ASUS</label>
             </div>
             <div>
-              <input id="msi" type="checkbox" v-model="prodsFilter" value="msi" />
+              <input id="msi" type="checkbox" v-model="productsFilter" value="msi" />
               <label for="msi">MSI</label>
             </div>
             <div>
-              <input id="asrock" type="checkbox" v-model="prodsFilter" value="asrock" />
+              <input id="asrock" type="checkbox" v-model="productsFilter" value="asrock" />
               <label for="asrock">AsRock</label>
             </div>
           </div>
@@ -131,7 +131,7 @@
               <input
                 id="motherboardSocket-1151"
                 type="checkbox"
-                v-model="prodsFilter"
+                v-model="productsFilter"
                 value="mb-1151"
               />
               <label for="motherboardSocket-1151">Socket-1151</label>
@@ -140,7 +140,7 @@
               <input
                 id="motherboardSocket-AM4"
                 type="checkbox"
-                v-model="prodsFilter"
+                v-model="productsFilter"
                 value="mb-am4"
               />
               <label for="motherboardSocket-AM4">Socket-AM4</label>
@@ -165,11 +165,11 @@
         <div class="collapse" data-parent="#accordion" id="collapseRamBrand">
           <div class="card-body">
             <div>
-              <input id="crucial-ram" type="checkbox" v-model="prodsFilter" value="crucial" />
+              <input id="crucial-ram" type="checkbox" v-model="productsFilter" value="crucial" />
               <label for="crucial-ram">Crucial</label>
             </div>
             <div>
-              <input id="kingston-ram" type="checkbox" v-model="prodsFilter" value="kingston" />
+              <input id="kingston-ram" type="checkbox" v-model="productsFilter" value="kingston" />
               <label for="kingston-ram">Kingston</label>
             </div>
           </div>
@@ -192,15 +192,15 @@
         <div class="collapse" data-parent="#accordion" id="collapseRamCapacity">
           <div class="card-body">
             <div>
-              <input id="8GB-ram" type="checkbox" v-model="prodsFilter" value="8GB" />
+              <input id="8GB-ram" type="checkbox" v-model="productsFilter" value="8GB" />
               <label for="8GB-ram">8 GB</label>
             </div>
             <div>
-              <input id="16GB-ram" type="checkbox" v-model="prodsFilter" value="16GB" />
+              <input id="16GB-ram" type="checkbox" v-model="productsFilter" value="16GB" />
               <label for="16GB-ram">16 GB</label>
             </div>
             <div>
-              <input id="32GB-ram" type="checkbox" v-model="prodsFilter" value="32GB" />
+              <input id="32GB-ram" type="checkbox" v-model="productsFilter" value="32GB" />
               <label for="32GB-ram">32 GB</label>
             </div>
           </div>
@@ -223,19 +223,19 @@
         <div class="collapse" data-parent="#accordion" id="collapseRamFrequency">
           <div class="card-body">
             <div>
-              <input id="1600Hz-ram" type="checkbox" v-model="prodsFilter" value="1600Hz" />
+              <input id="1600Hz-ram" type="checkbox" v-model="productsFilter" value="1600Hz" />
               <label for="8GB-ram">1600 Hz</label>
             </div>
             <div>
-              <input id="2400Hz-ram" type="checkbox" v-model="prodsFilter" value="2400Hz" />
+              <input id="2400Hz-ram" type="checkbox" v-model="productsFilter" value="2400Hz" />
               <label for="16GB-ram">2400 Hz</label>
             </div>
             <div>
-              <input id="3600Hz-ram" type="checkbox" v-model="prodsFilter" value="3600Hz" />
+              <input id="3600Hz-ram" type="checkbox" v-model="productsFilter" value="3600Hz" />
               <label for="3600Hz-ram">3600 Hz</label>
             </div>
             <div>
-              <input id="4000Hz-ram" type="checkbox" v-model="prodsFilter" value="4000Hz" />
+              <input id="4000Hz-ram" type="checkbox" v-model="productsFilter" value="4000Hz" />
               <label for="4000Hz-ram">4000 Hz</label>
             </div>
           </div>
@@ -258,11 +258,11 @@
         <div class="collapse" data-parent="#accordion" id="collapseChipProducer">
           <div class="card-body">
             <div>
-              <input id="amd" type="checkbox" v-model="prodsFilter" value="amd" />
+              <input id="amd" type="checkbox" v-model="productsFilter" value="amd" />
               <label for="amd">AMD</label>
             </div>
             <div>
-              <input id="nvidia" type="checkbox" v-model="prodsFilter" value="nvidia" />
+              <input id="nvidia" type="checkbox" v-model="productsFilter" value="nvidia" />
               <label for="nvidia">NVIDIA</label>
             </div>
           </div>
@@ -285,11 +285,11 @@
         <div class="collapse" data-parent="#accordion" id="collapseGpuBrand">
           <div class="card-body">
             <div>
-              <input id="asus" type="checkbox" v-model="prodsFilter" value="asus" />
+              <input id="asus" type="checkbox" v-model="productsFilter" value="asus" />
               <label for="asus">ASUS</label>
             </div>
             <div>
-              <input id="msi" type="checkbox" v-model="prodsFilter" value="msi" />
+              <input id="msi" type="checkbox" v-model="productsFilter" value="msi" />
               <label for="msi">MSI</label>
             </div>
           </div>
@@ -312,14 +312,14 @@
         <div class="collapse" data-parent="#accordion" id="collapseGpuSeries">
           <div class="card-body">
             <div>
-              <input id="radeon-VII" type="checkbox" v-model="prodsFilter" value="radeon-VII" />
+              <input id="radeon-VII" type="checkbox" v-model="productsFilter" value="radeon-VII" />
               <label for="radeon-VII">Radeon VII</label>
             </div>
             <div>
               <input
                 id="radeon-5000-series"
                 type="checkbox"
-                v-model="prodsFilter"
+                v-model="productsFilter"
                 value="radeon-5000-series"
               />
               <label for="radeon-5000-series">Radeon 5000</label>
@@ -344,19 +344,19 @@
         <div class="collapse" data-parent="#accordion" id="collapse80plus">
           <div class="card-body">
             <div>
-              <input id="bronze" type="checkbox" v-model="prodsFilter" value="bronze" />
+              <input id="bronze" type="checkbox" v-model="productsFilter" value="bronze" />
               <label for="bronze">Bronze</label>
             </div>
             <div>
-              <input id="silver" type="checkbox" v-model="prodsFilter" value="silver" />
+              <input id="silver" type="checkbox" v-model="productsFilter" value="silver" />
               <label for="silver">Silver</label>
             </div>
             <div>
-              <input id="gold" type="checkbox" v-model="prodsFilter" value="gold" />
+              <input id="gold" type="checkbox" v-model="productsFilter" value="gold" />
               <label for="gold">Gold</label>
             </div>
             <div>
-              <input id="platinum" type="checkbox" v-model="prodsFilter" value="platinum" />
+              <input id="platinum" type="checkbox" v-model="productsFilter" value="platinum" />
               <label for="platinum">Platinum</label>
             </div>
           </div>
@@ -379,15 +379,15 @@
         <div class="collapse" data-parent="#accordion" id="collapsePsuWatt">
           <div class="card-body">
             <div>
-              <input id="400-700" type="checkbox" v-model="prodsFilter" value="400-700" />
+              <input id="400-700" type="checkbox" v-model="productsFilter" value="400-700" />
               <label for="400-700">400W - 700W</label>
             </div>
             <div>
-              <input id="700-1000" type="checkbox" v-model="prodsFilter" value="700-1000" />
+              <input id="700-1000" type="checkbox" v-model="productsFilter" value="700-1000" />
               <label for="700-1000">700W - 1000W</label>
             </div>
             <div>
-              <input id="1000+" type="checkbox" v-model="prodsFilter" value="1000+" />
+              <input id="1000+" type="checkbox" v-model="productsFilter" value="1000+" />
               <label for="1000+">1000W +</label>
             </div>
           </div>
@@ -410,11 +410,16 @@
         <div class="collapse" data-parent="#accordion" id="collapseCableConnection">
           <div class="card-body">
             <div>
-              <input id="fixed-cable" type="checkbox" v-model="prodsFilter" value="fixed-cable" />
+              <input id="fixed-cable" type="checkbox" v-model="productsFilter" value="fixed-cable" />
               <label for="fixed-cable">Fixed Cable</label>
             </div>
             <div>
-              <input id="modular-cable" type="checkbox" v-model="prodsFilter" value="modular-cable" />
+              <input
+                id="modular-cable"
+                type="checkbox"
+                v-model="productsFilter"
+                value="modular-cable"
+              />
               <label for="modular-cable">Modular Cable</label>
             </div>
           </div>
@@ -437,11 +442,11 @@
         <div class="collapse" data-parent="#accordion" id="collapseCaseSize">
           <div class="card-body">
             <div>
-              <input id="Atx" type="checkbox" v-model="prodsFilter" value="Atx" />
+              <input id="Atx" type="checkbox" v-model="productsFilter" value="Atx" />
               <label for="Atx">ATX</label>
             </div>
             <div>
-              <input id="matx" type="checkbox" v-model="prodsFilter" value="matx" />
+              <input id="matx" type="checkbox" v-model="productsFilter" value="matx" />
               <label for="matx">m-ATX</label>
             </div>
           </div>
@@ -456,22 +461,15 @@ import { mapGetters } from 'vuex';
 
 export default {
   data() {
-    return {
-      prodsFilter: []
-    };
+    return {};
   },
 
   watch: {
-    prodsFilter: function () {
-      const vm = this;
-      vm.$emit('filterUpdate', vm.prodsFilter);
-    },
-
     categoryFilter: {
       immediate: true,
       handler() {
         this.clearCheckbox();
-        this.clearProdsFilter();
+        this.clearProductsFilter();
       }
     }
   },
@@ -484,9 +482,8 @@ export default {
       }
     },
 
-    clearProdsFilter() {
-      const vm = this;
-      vm.prodsFilter = [];
+    clearProductsFilter() {
+      this.$store.dispatch('updateProductsFilter', []);
     },
 
     clearCategoryFilter() {
@@ -495,17 +492,29 @@ export default {
 
     clearAll() {
       this.clearCheckbox();
-      this.clearProdsFilter();
+      this.clearProductsFilter();
       this.clearCategoryFilter();
     },
 
     updateCategoryFilter(filter) {
       this.$store.dispatch('updateCategoryFilter', filter);
+    },
+
+    updateProductsFilter(filter) {
+      this.$store.dispatch('updateProductsFilter', filter);
     }
   },
 
   computed: {
-    ...mapGetters(['categoryFilter'])
+    ...mapGetters(['categoryFilter']),
+    productsFilter: {
+      get() {
+        return this.$store.state.productsFilter;
+      },
+      set(filter) {
+        this.$store.commit('PRODUCTSFILTER', filter);
+      }
+    }
   },
 
   created() {

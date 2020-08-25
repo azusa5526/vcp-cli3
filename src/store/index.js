@@ -12,7 +12,7 @@ export default new Vuex.Store({
     activedProducts: [],
     categoryFilteredProducts: [],
     categoryFilter: '',
-    productsFilter: ''
+    productsFilter: []
   },
   actions: {
     updateLoading(context, status) {
@@ -79,10 +79,6 @@ export default new Vuex.Store({
           return item.category.indexOf(filter) !== -1;
         });
       }
-      console.log(
-        'CATEGORYFILTEREDPRODUCTS AFTER state.categoryFilteredProducts: ',
-        state.categoryFilteredProducts
-      );
       localStorage.setItem('cateFilteredList', JSON.stringify(state.categoryFilteredProducts));
     },
 

@@ -85,8 +85,7 @@ export default {
       },
 
       filteredProducts: [],
-      productsInWindow: [],
-      tempRandomProducts: []
+      productsInWindow: []
     };
   },
 
@@ -100,7 +99,6 @@ export default {
       const vm = this;
       this.$store.dispatch('getCategoryFilteredProducts', this.categoryFilter);
       let tempProducts = this.categoryFilteredProducts;
-      console.log('productsFilterList : categoryFilteredProducts', this.categoryFilteredProducts);
 
       if (vm.productsFilter.length === 0) {
         return tempProducts;
