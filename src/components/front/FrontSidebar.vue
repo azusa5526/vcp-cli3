@@ -8,17 +8,17 @@
       <button @click="clearAll" class="btn">Clear Filter</button>
     </div>
 
-    <div class="side-categoryFilter" v-if="cateFilter === 'all'">
-      <router-link class="btn" to="/frontProducts/cpu">CPU</router-link>
-      <router-link class="btn" to="/frontProducts/motherboard">Motherboard</router-link>
-      <router-link class="btn" to="/frontProducts/ram">RAM</router-link>
-      <router-link class="btn" to="/frontProducts/graphic_card">Graphic Card</router-link>
-      <router-link class="btn" to="/frontProducts/psu">PSU</router-link>
-      <router-link class="btn" to="/frontProducts/case">Case</router-link>
+    <div class="side-categoryFilter" v-if="categoryFilter === 'all'">
+      <button class="btn" @click="updateCategoryFilter('cpu')">CPU</button>
+      <button class="btn" @click="updateCategoryFilter('motherboard')">Motherboard</button>
+      <button class="btn" @click="updateCategoryFilter('ram')">RAM</button>
+      <button class="btn" @click="updateCategoryFilter('graphic_card')">Graphic Card</button>
+      <button class="btn" @click="updateCategoryFilter('psu')">PSU</button>
+      <button class="btn" @click="updateCategoryFilter('case')">Case</button>
     </div>
 
     <div id="accordion">
-      <div class="card" v-if="cateFilter === 'cpu'">
+      <div class="card" v-if="categoryFilter === 'cpu'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseCpuBrand"
@@ -50,7 +50,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'cpu'">
+      <div class="card" v-if="categoryFilter === 'cpu'">
         <div class="card-header" id="headingTwo">
           <h5 class="mb-0">
             <button
@@ -81,7 +81,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'motherboard'">
+      <div class="card" v-if="categoryFilter === 'motherboard'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseMohterboardBrand"
@@ -112,7 +112,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'motherboard'">
+      <div class="card" v-if="categoryFilter === 'motherboard'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseMotherboardSocket"
@@ -149,7 +149,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'ram'">
+      <div class="card" v-if="categoryFilter === 'ram'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseRamBrand"
@@ -176,7 +176,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'ram'">
+      <div class="card" v-if="categoryFilter === 'ram'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseRamCapacity"
@@ -207,7 +207,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'ram'">
+      <div class="card" v-if="categoryFilter === 'ram'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseRamFrequency"
@@ -242,7 +242,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'graphic_card'">
+      <div class="card" v-if="categoryFilter === 'graphic_card'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseChipProducer"
@@ -269,7 +269,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'graphic_card'">
+      <div class="card" v-if="categoryFilter === 'graphic_card'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseGpuBrand"
@@ -296,7 +296,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'graphic_card'">
+      <div class="card" v-if="categoryFilter === 'graphic_card'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseGpuSeries"
@@ -328,7 +328,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'psu'">
+      <div class="card" v-if="categoryFilter === 'psu'">
         <h5 class="mb-0">
           <button
             aria-controls="collapse80plus"
@@ -363,7 +363,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'psu'">
+      <div class="card" v-if="categoryFilter === 'psu'">
         <h5 class="mb-0">
           <button
             aria-controls="collapsePsuWatt"
@@ -394,7 +394,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'psu'">
+      <div class="card" v-if="categoryFilter === 'psu'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseCableConnection"
@@ -421,7 +421,7 @@
         </div>
       </div>
 
-      <div class="card" v-if="cateFilter === 'case'">
+      <div class="card" v-if="categoryFilter === 'case'">
         <h5 class="mb-0">
           <button
             aria-controls="collapseCaseSize"
@@ -452,10 +452,10 @@
 </template>
 
 <script>
-export default {
-  props: ['cateFilter'],
+import { mapGetters } from 'vuex';
 
-  data () {
+export default {
+  data() {
     return {
       prodsFilter: []
     };
@@ -467,31 +467,49 @@ export default {
       vm.$emit('filterUpdate', vm.prodsFilter);
     },
 
-    cateFilter: {
+    categoryFilter: {
       immediate: true,
-      handler () {
-        this.clearAll();
+      handler() {
+        this.clearCheckbox();
+        this.clearProdsFilter();
       }
     }
   },
 
   methods: {
-    clearCheckbox () {
+    clearCheckbox() {
       const checkbox = document.getElementsByTagName('input');
       for (let i = 0; i < checkbox.length; i++) {
         checkbox[i].checked = false;
       }
     },
 
-    clearProdsFilter () {
+    clearProdsFilter() {
       const vm = this;
       vm.prodsFilter = [];
     },
 
-    clearAll () {
+    clearCategoryFilter() {
+      this.$store.dispatch('updateCategoryFilter', 'all');
+    },
+
+    clearAll() {
       this.clearCheckbox();
       this.clearProdsFilter();
+      this.clearCategoryFilter();
+    },
+
+    updateCategoryFilter(filter) {
+      this.$store.dispatch('updateCategoryFilter', filter);
     }
+  },
+
+  computed: {
+    ...mapGetters(['categoryFilter'])
+  },
+
+  created() {
+    this.$store.dispatch('updateCategoryFilter', 'all');
   }
 };
 </script>

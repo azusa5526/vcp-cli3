@@ -23,7 +23,7 @@
           <router-link class="nav-link" to="/Front_check_order">CHECK ORDER</router-link>
         </li>
         <li class="nav-item">
-          <router-link class="nav-link" to="/frontProducts/all">PRODUCTS</router-link>
+          <a class="nav-link" @click="updateCategoryFilter">PRODUCTS</a>
         </li>
       </ul>
 
@@ -70,14 +70,14 @@ $(function () {
 });
 
 export default {
-  data () {
+  data() {
     return {
       is_login: false
     };
   },
 
   methods: {
-    checkLoginStatus () {
+    checkLoginStatus() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/user/check`;
 
@@ -86,7 +86,7 @@ export default {
       });
     },
 
-    signOut () {
+    signOut() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/logout`;
 
@@ -96,10 +96,16 @@ export default {
           vm.$router.push('/home');
         }
       });
+    },
+
+    updateCategoryFilter() {
+      const categoryFilter = 'all';
+      this.$store.dispatch('updateCategoryFilter', categoryFilter);
+      this.$router.push('/frontProducts/all');
     }
   },
 
-  created () {
+  created() {
     this.checkLoginStatus();
   }
 };
