@@ -44,6 +44,8 @@
 </template>
 
 <script>
+import { mapGetters } from 'vuex';
+
 export default {
   name: 'Login',
   data() {
@@ -59,7 +61,7 @@ export default {
     signin() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/admin/signin`;
-      this.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('updateLoading', true);
 
       vm.$http.post(api, vm.user).then((response) => {
         this.$store.dispatch('updateLoading', false);
@@ -70,6 +72,10 @@ export default {
         }
       });
     }
+  },
+
+  computed: {
+    ...mapGetters(['isLoading'])
   }
 };
 </script>

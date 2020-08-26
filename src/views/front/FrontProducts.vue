@@ -47,9 +47,9 @@
 
         <div class="row justify-content-center">
           <Pgnation
+            class="my-4"
             :pagination="pgnation"
             @changePage="changeCurrentPage"
-            class="my-4"
             v-if="filteredProducts.length !== 0"
           ></Pgnation>
         </div>
@@ -198,8 +198,7 @@ export default {
 
   created() {
     this.$store.dispatch('getAllProducts');
-    this.pgnationCounter();
-    this.pageSpliter();
+    this.changeCurrentPage(1);
   }
 };
 </script>
