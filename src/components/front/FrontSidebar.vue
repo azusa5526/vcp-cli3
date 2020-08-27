@@ -509,10 +509,10 @@ export default {
     ...mapGetters('productsModule', ['categoryFilter']),
     productsFilter: {
       get() {
-        return this.$store.state.productsFilter;
+        return this.$store.state.productsModule.productsFilter;
       },
       set(filter) {
-        this.$store.commit('PRODUCTSFILTER', filter);
+        this.$store.commit('productsModule/PRODUCTSFILTER', filter);
       }
     }
   },

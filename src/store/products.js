@@ -58,11 +58,11 @@ export default {
 
     CATEGORYFILTEREDPRODUCTS(state, filter) {
       if (filter === 'all') {
-        state.categoryFilteredProducts = state.activedProducts;
+        state.categoryFilteredProducts = state.activedProducts.reverse();
       } else {
         state.categoryFilteredProducts = state.activedProducts.filter(function (item) {
           return item.category.indexOf(filter) !== -1;
-        });
+        }).reverse();
       }
       localStorage.setItem('cateFilteredList', JSON.stringify(state.categoryFilteredProducts));
     },
@@ -81,7 +81,7 @@ export default {
     },
 
     categoryFilteredProducts(state) {
-      return state.categoryFilteredProducts.reverse();
+      return state.categoryFilteredProducts;
     },
 
     categoryFilter(state) {

@@ -6,6 +6,7 @@ import productsModule from './products';
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  strict: true,
   state: {
     isLoading: false,
     shoppingCart: []
