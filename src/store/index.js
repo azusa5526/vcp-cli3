@@ -12,7 +12,8 @@ export default new Vuex.Store({
     activedProducts: [],
     categoryFilteredProducts: [],
     categoryFilter: '',
-    productsFilter: []
+    productsFilter: [],
+    shoppingCart: []
   },
   actions: {
     updateLoading(context, status) {
@@ -45,6 +46,15 @@ export default new Vuex.Store({
       });
     },
 
+    getShoppingCart(context) {
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
+      context.commit('LOADING', true);
+      axios.get(api).then((response) => {
+        context.commit('SHOPPINGCART', response.data.data);
+        context.commit('LOADING', false);
+      });
+    },
+
     updateCategoryFilter(context, filter) {
       context.commit('CATEGORYFILTER', filter);
     },
@@ -53,7 +63,6 @@ export default new Vuex.Store({
       context.commit('PRODUCTSFILTER', filter);
     }
   },
-
   mutations: {
     LOADING(state, status) {
       state.isLoading = status;
@@ -80,6 +89,10 @@ export default new Vuex.Store({
       localStorage.setItem('cateFilteredList', JSON.stringify(state.categoryFilteredProducts));
     },
 
+    SHOPPINGCART(state, axiosData) {
+      state.shoppingCart = axiosData;
+    },
+
     CATEGORYFILTER(state, filter) {
       state.categoryFilter = filter;
     },
@@ -88,7 +101,6 @@ export default new Vuex.Store({
       state.productsFilter = filter;
     }
   },
-
   getters: {
     isLoading(state) {
       return state.isLoading;
@@ -100,6 +112,10 @@ export default new Vuex.Store({
 
     categoryFilteredProducts(state) {
       return state.categoryFilteredProducts.reverse();
+    },
+
+    shoppingCart(state) {
+      return state.shoppingCart;
     },
 
     categoryFilter(state) {

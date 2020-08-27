@@ -62,7 +62,7 @@
 import FrontSidebar from '@/components/front/FrontSidebar.vue';
 import Pgnation from '@/components/front/Pgnation.vue';
 import FrontSlidesProducts from './FrontSlidesProducts.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -151,7 +151,8 @@ export default {
       vm.pgnation.current_page = Number(targetPage);
       vm.pgnationCounter();
       vm.pageSpliter();
-    }
+    },
+    ...mapActions(['getAllProducts'])
   },
 
   computed: {
@@ -197,7 +198,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('getAllProducts');
+    this.getAllProducts();
     this.changeCurrentPage(1);
   }
 };

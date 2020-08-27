@@ -113,6 +113,8 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
@@ -123,7 +125,6 @@ export default {
         num: 1
       },
       clickedButton: '',
-      shoppingCart: [],
       isHero: false
     };
   },
@@ -172,17 +173,6 @@ export default {
       });
     },
 
-    getCart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      this.$store.dispatch('updateLoading', true);
-
-      vm.$http.get(api).then((response) => {
-        vm.shoppingCart = response.data.data;
-        this.$store.dispatch('updateLoading', false);
-      });
-    },
-
     addToCart(id, direct, qty = 1) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
@@ -201,13 +191,13 @@ export default {
         if (item.product.id === cart.product_id) {
           cart.qty = item.qty + cart.qty;
           vm.removeCartItem(item.id);
-          vm.getCart();
+          vm.getShoppingCart();
         }
       });
 
       vm.$http.post(api, { data: cart }).then((response) => {
         if (response.data.success) {
-          vm.getCart();
+          vm.getShoppingCart();
           vm.$bus.$emit('message:push', 'Successfully add to cart', 'secondary');
           vm.clickedButton = '';
           vm.product.num = 1;
@@ -281,14 +271,19 @@ export default {
       }
 
       this.recommandProducts = newArr;
-    }
+    },
+    ...mapActions(['getShoppingCart'])
+  },
+
+  computed: {
+    ...mapGetters(['shoppingCart'])
   },
 
   created() {
     this.productId = this.$route.params.productID;
     this.localCateProducts = JSON.parse(localStorage.getItem('cateFilteredList'));
     this.getSingleProduct();
-    this.getCart();
+    this.getShoppingCart();
   }
 };
 </script>

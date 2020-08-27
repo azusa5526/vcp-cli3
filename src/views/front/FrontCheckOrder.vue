@@ -105,18 +105,23 @@ export default {
     getOrderById() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.inputOrderId}`;
-      this.$store.dispatch('updateLoading', true);
 
-      vm.$http.get(api).then((response) => {
-        if (response.data.order != null) {
-          vm.order = response.data.order;
-          vm.inputOrderId = '';
-          this.$store.dispatch('updateLoading', false);
-        } else {
-          vm.$bus.$emit('message:push', 'Order ID not found', 'third');
-          this.$store.dispatch('updateLoading', false);
-        }
-      });
+      if (vm.inputOrderId === '') {
+        vm.$bus.$emit('message:push', 'Please input Order ID', 'third');
+      } else {
+        this.$store.dispatch('updateLoading', true);
+
+        vm.$http.get(api).then((response) => {
+          if (response.data.order != null) {
+            vm.order = response.data.order;
+            vm.inputOrderId = '';
+            this.$store.dispatch('updateLoading', false);
+          } else {
+            vm.$bus.$emit('message:push', 'Order ID not found', 'third');
+            this.$store.dispatch('updateLoading', false);
+          }
+        });
+      }
     },
 
     payOrder() {

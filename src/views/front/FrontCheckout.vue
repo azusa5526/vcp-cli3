@@ -33,7 +33,7 @@
       <table class="table">
         <tbody>
           <tr>
-            <th width="130px">ORDER NUM</th>
+            <th width="130px">ORDER ID</th>
             <td>{{order.id}}</td>
           </tr>
           <tr>
@@ -93,7 +93,6 @@ import $ from 'jquery';
 export default {
   data() {
     return {
-      orderId: '',
       order: {
         user: {}
       }
@@ -103,7 +102,7 @@ export default {
   methods: {
     getOrder() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${vm.orderId}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/order/${this.$route.params.orderId}`;
       this.$store.dispatch('updateLoading', true);
       vm.$http.get(api).then((response) => {
         if (response.data.success) {
@@ -115,7 +114,7 @@ export default {
 
     payOrder() {
       const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${vm.orderId}`;
+      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/pay/${this.$route.params.orderId}`;
       this.$store.dispatch('updateLoading', true);
       vm.$http.post(api).then((response) => {
         if (response.data.success) {
@@ -135,7 +134,6 @@ export default {
   },
 
   created() {
-    this.orderId = this.$route.params.orderId;
     this.getOrder();
   }
 };

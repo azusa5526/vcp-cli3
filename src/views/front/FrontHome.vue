@@ -133,7 +133,7 @@
 
 <script>
 import FrontSlideshow from './FrontSlideshow.vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapActions } from 'vuex';
 
 export default {
   components: {
@@ -164,7 +164,8 @@ export default {
         document.body.removeChild(input);
       });
       vm.$bus.$emit('message:push', 'Coupon Code Copied', 'secondary');
-    }
+    },
+    ...mapActions(['getAllProducts'])
   },
 
   computed: {
@@ -172,7 +173,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('getAllProducts');
+    this.getAllProducts();
   }
 };
 </script>

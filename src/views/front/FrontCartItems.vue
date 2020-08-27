@@ -80,10 +80,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
-      shoppingCart: [],
       couponCode: '',
       form: {
         user: {
@@ -106,16 +107,16 @@ export default {
         product_id: productId,
         qty
       };
-      this.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('updateLoading', true);
 
       vm.$http.delete(rmApi).then((response) => {
         if (response.data.success) {
           vm.$http.post(addApi, { data: cart }).then((response) => {
             if (response.data.success) {
-              vm.getCart();
+              vm.getShoppingCart();
             } else {
               vm.$bus.$emit('message:push', 'Fail update(add) cart Qty', 'third');
-              this.$store.dispatch('updateLoading', false);
+              vm.$store.dispatch('updateLoading', false);
             }
           });
         } else {
@@ -128,16 +129,16 @@ export default {
     removeCartItem(id) {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart/${id}`;
-      this.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('updateLoading', true);
 
       vm.$http.delete(api).then((response) => {
         if (response.data.success) {
           vm.$bus.$emit('message:push', 'Remove item succefully', 'primary');
-          this.$store.dispatch('updateLoading', false);
-          vm.getCart();
+          vm.$store.dispatch('updateLoading', false);
+          vm.getShoppingCart();
         } else {
           vm.$bus.$emit('message:push', 'Fail delete item from cart', 'third');
-          this.$store.dispatch('updateLoading', false);
+          vm.$store.dispatch('updateLoading', false);
         }
       });
     },
@@ -152,7 +153,7 @@ export default {
 
       vm.$http.post(api, { data: cart }).then((response) => {
         if (response.data.success) {
-          vm.getCart();
+          vm.getShoppingCart();
         } else {
           vm.$bus.$emit('message:push', 'Fail update cart Qty', 'third');
         }
@@ -165,28 +166,17 @@ export default {
       const coupon = {
         code: vm.couponCode
       };
-      this.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('updateLoading', true);
 
       vm.$http.post(api, { data: coupon }).then((response) => {
         if (response.data.success) {
-          vm.getCart();
-          this.$store.dispatch('updateLoading', false);
+          vm.getShoppingCart();
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Apply coupon succefully', 'primary');
         } else {
-          this.$store.dispatch('updateLoading', false);
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Coupon code not found', 'third');
         }
-      });
-    },
-
-    getCart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-      this.$store.dispatch('updateLoading', true);
-
-      vm.$http.get(api).then((response) => {
-        vm.shoppingCart = response.data.data;
-        this.$store.dispatch('updateLoading', false);
       });
     },
 
@@ -202,7 +192,8 @@ export default {
       if (item.qty < 5) {
         vm.updateCart(item.id, item.product_id, item.qty + 1);
       }
-    }
+    },
+    ...mapActions(['getShoppingCart'])
   },
 
   computed: {
@@ -217,11 +208,12 @@ export default {
           return true;
         }
       }
-    }
+    },
+    ...mapGetters(['shoppingCart'])
   },
 
   created() {
-    this.getCart();
+    this.getShoppingCart();
   }
 };
 </script>

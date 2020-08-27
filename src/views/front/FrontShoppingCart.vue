@@ -36,10 +36,11 @@
 </template>
 
 <script>
+import { mapGetters, mapActions } from 'vuex';
+
 export default {
   data() {
     return {
-      shoppingCart: [],
       couponCode: '',
       form: {
         user: {
@@ -55,16 +56,7 @@ export default {
   },
 
   methods: {
-    getCart() {
-      const vm = this;
-      const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/cart`;
-
-      this.$store.dispatch('updateLoading', true);
-      vm.$http.get(api).then((response) => {
-        vm.shoppingCart = response.data.data;
-        this.$store.dispatch('updateLoading', false);
-      });
-    }
+    ...mapActions(['getShoppingCart'])
   },
 
   computed: {
@@ -83,11 +75,12 @@ export default {
           return true;
         }
       }
-    }
+    },
+    ...mapGetters(['shoppingCart'])
   },
 
   created() {
-    this.getCart();
+    this.getShoppingCart();
   }
 };
 </script>
