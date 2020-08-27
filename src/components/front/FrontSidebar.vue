@@ -483,11 +483,11 @@ export default {
     },
 
     clearProductsFilter() {
-      this.$store.dispatch('updateProductsFilter', []);
+      this.$store.dispatch('productsModule/updateProductsFilter', []);
     },
 
     clearCategoryFilter() {
-      this.$store.dispatch('updateCategoryFilter', 'all');
+      this.$store.dispatch('productsModule/updateCategoryFilter', 'all');
     },
 
     clearAll() {
@@ -497,16 +497,16 @@ export default {
     },
 
     updateCategoryFilter(filter) {
-      this.$store.dispatch('updateCategoryFilter', filter);
+      this.$store.dispatch('productsModule/updateCategoryFilter', filter);
     },
 
     updateProductsFilter(filter) {
-      this.$store.dispatch('updateProductsFilter', filter);
+      this.$store.dispatch('productsModule/updateProductsFilter', filter);
     }
   },
 
   computed: {
-    ...mapGetters(['categoryFilter']),
+    ...mapGetters('productsModule', ['categoryFilter']),
     productsFilter: {
       get() {
         return this.$store.state.productsFilter;
@@ -518,7 +518,7 @@ export default {
   },
 
   created() {
-    this.$store.dispatch('updateCategoryFilter', 'all');
+    this.$store.dispatch('productsModule/updateCategoryFilter', 'all');
   }
 };
 </script>

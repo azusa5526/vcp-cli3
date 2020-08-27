@@ -92,12 +92,12 @@ export default {
   methods: {
     getSingleProduct(id) {
       const categoryFilter = this.$route.params.categoryFilter;
-      this.$store.dispatch('getSingleProduct', { id, categoryFilter });
+      this.$store.dispatch('productsModule/getSingleProduct', { id, categoryFilter });
     },
 
     productsFilterList() {
       const vm = this;
-      this.$store.dispatch('getCategoryFilteredProducts', this.categoryFilter);
+      this.$store.dispatch('productsModule/getCategoryFilteredProducts', this.categoryFilter);
       let tempProducts = this.categoryFilteredProducts;
 
       if (vm.productsFilter.length === 0) {
@@ -152,7 +152,7 @@ export default {
       vm.pgnationCounter();
       vm.pageSpliter();
     },
-    ...mapActions(['getAllProducts'])
+    ...mapActions('productsModule', ['getAllProducts'])
   },
 
   computed: {
@@ -176,7 +176,7 @@ export default {
       vm.pageSpliter();
       return productsInWindow;
     },
-    ...mapGetters(['allProducts', 'categoryFilteredProducts', 'categoryFilter', 'productsFilter'])
+    ...mapGetters('productsModule', ['allProducts', 'categoryFilteredProducts', 'categoryFilter', 'productsFilter'])
   },
 
   watch: {

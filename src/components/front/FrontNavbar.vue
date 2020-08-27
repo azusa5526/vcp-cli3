@@ -100,7 +100,7 @@ export default {
 
     updateCategoryFilter() {
       const categoryFilter = 'all';
-      this.$store.dispatch('updateCategoryFilter', categoryFilter);
+      this.$store.dispatch('productsModule/updateCategoryFilter', categoryFilter);
       this.$router.push('/frontProducts/all');
     }
   },

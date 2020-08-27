@@ -165,11 +165,11 @@ export default {
       });
       vm.$bus.$emit('message:push', 'Coupon Code Copied', 'secondary');
     },
-    ...mapActions(['getAllProducts'])
+    ...mapActions('productsModule', ['getAllProducts'])
   },
 
   computed: {
-    ...mapGetters(['allProducts'])
+    ...mapGetters('productsModule', ['allProducts'])
   },
 
   created() {
