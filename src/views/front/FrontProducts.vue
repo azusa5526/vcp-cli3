@@ -97,7 +97,7 @@ export default {
 
     productsFilterList() {
       const vm = this;
-      this.$store.dispatch('productsModule/getCategoryFilteredProducts', this.categoryFilter);
+      vm.$store.dispatch('productsModule/getCategoryFilteredProducts', this.categoryFilter);
       let tempProducts = this.categoryFilteredProducts;
 
       if (vm.productsFilter.length === 0) {

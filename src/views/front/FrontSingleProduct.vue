@@ -141,22 +141,23 @@ export default {
       const vm = this;
       if (vm.product.category.indexOf('hero') !== -1) {
         vm.isHero = true;
+        vm.$store.dispatch('updateLoading', false);
       } else {
         vm.isHero = false;
+        vm.$store.dispatch('updateLoading', false);
       }
     },
 
     getSingleProduct() {
       const vm = this;
       const api = `${process.env.VUE_APP_API_PATH}/api/${process.env.VUE_APP_CUSTOM_PATH}/product/${vm.productId}`;
-      this.$store.dispatch('updateLoading', true);
+      vm.$store.dispatch('updateLoading', true);
       vm.randomProduct(vm.localCateProducts, 4);
 
       vm.$http.get(api).then((response) => {
         if (response.data.success) {
           vm.product = response.data.product;
           vm.$set(vm.product, 'num', 1);
-          this.$store.dispatch('updateLoading', false);
           vm.hero();
         }
       });
@@ -219,9 +220,9 @@ export default {
 
       vm.$http.delete(api).then((response) => {
         if (response.data.success) {
-          this.$store.dispatch('updateLoading', false);
+          vm.$store.dispatch('updateLoading', false);
         } else {
-          this.$store.dispatch('updateLoading', false);
+          vm.$store.dispatch('updateLoading', false);
           vm.$bus.$emit('message:push', 'Fail to remove to cart', 'third');
         }
       });

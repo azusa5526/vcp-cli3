@@ -147,7 +147,7 @@ export default {
   methods: {
     getSingleProduct(id) {
       const categoryFilter = 'hero';
-      this.$store.dispatch('getSingleProduct', { id, categoryFilter });
+      this.$store.dispatch('productsModule/getSingleProduct', { id, categoryFilter });
     },
 
     copyCouponCode() {
